@@ -1,12 +1,11 @@
 package edu.virginia.engine.display;
 
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Point;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+
 
 import javax.imageio.ImageIO;
 
@@ -206,11 +205,9 @@ public class DisplayObject {
 		g2d.translate(this.position.x, this.position.y);
 		g2d.rotate(Math.toRadians(this.getRotation()));
 		g2d.scale(this.scaleX, this.scaleY);
-//		float curAlpha;
-//		this.oldAlpha = curAlpha = ((AlphaComposite)
-//		g2d.getComposite()).getAlpha();
-//		g2d.setComposite(AlphaComposite.getInstance(3, curAlpha *
-//		this.alpha));
+		float curAlpha;
+		this.oldAlpha = curAlpha = ((AlphaComposite)g2d.getComposite()).getAlpha();
+		g2d.setComposite(AlphaComposite.getInstance(3, curAlpha * this.alpha));
 	}
 
 	/**
@@ -220,6 +217,8 @@ public class DisplayObject {
 	protected void reverseTransformations(Graphics2D g2d) {
 		g2d.translate(this.position.x * -1, this.position.y * -1);
 		g2d.rotate(Math.toRadians(this.getRotation() * -1));
+		g2d.scale((this.scaleX * -1),(this.scaleY * -1));
+		g2d.setComposite(AlphaComposite.getInstance(3, this.oldAlpha));
 	}
 	
 	public int getRotation() {
