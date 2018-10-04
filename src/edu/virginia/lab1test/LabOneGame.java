@@ -32,7 +32,8 @@ public class LabOneGame extends Game{
 		
 		/* Make sure mario is not null. Sometimes Swing can auto cause an extra frame to go before everything is initialized */
 		if(mario != null) mario.update(pressedKeys);
-		
+
+
 	}
 	
 	/**
