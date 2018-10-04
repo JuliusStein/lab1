@@ -2,6 +2,7 @@ package edu.virginia.engine.display;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -17,6 +18,10 @@ public class DisplayObject {
 
 	/* All DisplayObject have a unique id */
 	private String id;
+	
+	private Point position;
+	private Point pivotPoint;
+	private int rotation;
 	private boolean visible;
 	private float alpha;
 	private float oldAlpha;
@@ -73,6 +78,9 @@ public class DisplayObject {
 	 */
 	public DisplayObject(String id) {
 		this.setId(id);
+		this.setPivotPoint(new Point(0,0));
+		this.setPosition(new Point(0,0));
+		this.setRotation(0);
 		this.setVisible(true);
 		this.setAlpha(1.0f);
 		this.setOldAlpha(0.0f);
@@ -83,6 +91,9 @@ public class DisplayObject {
 	public DisplayObject(String id, String fileName) {
 		this.setId(id);
 		this.setImage(fileName);
+		this.setPivotPoint(new Point(0,0));
+		this.setPosition(new Point(0,0));
+		this.setRotation(0);
 	}
 
 	public void setId(String id) {
@@ -196,6 +207,30 @@ public class DisplayObject {
 	 * */
 	protected void reverseTransformations(Graphics2D g2d) {
 
+	}
+	
+	public int getRotation() {
+		return rotation;
+	}
+
+	public void setRotation(int rotation) {
+		this.rotation = rotation;
+	}
+
+	public Point getPivotPoint() {
+		return pivotPoint;
+	}
+
+	public void setPivotPoint(Point pivotPoint) {
+		this.pivotPoint = pivotPoint;
+	}
+
+	public Point getPosition() {
+		return position;
+	}
+
+	public void setPosition(Point position) {
+		this.position = position;
 	}
 
 }
