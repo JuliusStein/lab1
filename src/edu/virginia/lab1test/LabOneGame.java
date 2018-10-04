@@ -52,6 +52,15 @@ public class LabOneGame extends Game{
 		if (pressedKeys.contains(KeyEvent.VK_W))
 				mario.setRotation(mario.getRotation() - 5);
 		
+		if (pressedKeys.contains(KeyEvent.VK_I))
+			mario.setPivotPoint(new Point(mario.getPivotPoint().x, mario.getPivotPoint().y - 5));
+		if (pressedKeys.contains(KeyEvent.VK_K))
+			mario.setPivotPoint(new Point(mario.getPivotPoint().x, mario.getPivotPoint().y + 5));
+		if (pressedKeys.contains(KeyEvent.VK_J))
+			mario.setPivotPoint(new Point(mario.getPivotPoint().x - 5, mario.getPivotPoint().y));
+		if (pressedKeys.contains(KeyEvent.VK_L))
+			mario.setPivotPoint(new Point(mario.getPivotPoint().x + 5, mario.getPivotPoint().y));
+		
 	}
 	
 	/**
