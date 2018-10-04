@@ -17,6 +17,52 @@ public class DisplayObject {
 
 	/* All DisplayObject have a unique id */
 	private String id;
+	private boolean visible;
+	private float alpha;
+	private float oldAlpha;
+	private double scaleX;
+	private double scaleY;
+
+	public boolean isVisible() {
+		return visible;
+	}
+
+	public float getAlpha() {
+		return alpha;
+	}
+
+	public float getOldAlpha() {
+		return oldAlpha;
+	}
+
+	public double getScaleX() {
+		return scaleX;
+	}
+
+	public double getScaleY() {
+		return scaleY;
+	}
+
+	public void setVisible(boolean visible) {
+		this.visible = visible;
+	}
+
+	public void setAlpha(float alpha) {
+		this.alpha = alpha;
+	}
+
+	public void setOldAlpha(float oldAlpha) {
+		this.oldAlpha = oldAlpha;
+	}
+
+	public void setScaleX(double scaleX) {
+		this.scaleX = scaleX;
+	}
+
+	public void setScaleY(double scaleY) {
+		this.scaleY = scaleY;
+	}
+
 
 	/* The image that is displayed by this object */
 	private BufferedImage displayImage;
@@ -27,6 +73,11 @@ public class DisplayObject {
 	 */
 	public DisplayObject(String id) {
 		this.setId(id);
+		this.setVisible(true);
+		this.setAlpha(1.0f);
+		this.setOldAlpha(0.0f);
+		this.setScaleX(1.0);
+		this.setScaleY(1.0);
 	}
 
 	public DisplayObject(String id, String fileName) {
