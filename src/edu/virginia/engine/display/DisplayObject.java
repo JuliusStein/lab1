@@ -130,6 +130,7 @@ public class DisplayObject {
 		if (imageName == null) {
 			return;
 		}
+
 		displayImage = readImage(imageName);
 		if (displayImage == null) {
 			System.err.println("[DisplayObject.setImage] ERROR: " + imageName + " does not exist!");
