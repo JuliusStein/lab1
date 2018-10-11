@@ -11,13 +11,13 @@ import javax.imageio.ImageIO;
 
 /**
  * A very basic display object for a java based gaming engine
- * 
+ *
  * */
 public class DisplayObject {
 
 	/* All DisplayObject have a unique id */
 	private String id;
-	
+
 	private Point position;
 	private Point pivotPoint;
 	private int rotation;
@@ -165,7 +165,7 @@ public class DisplayObject {
 	 * to update objects appropriately.
 	 * */
 	protected void update(ArrayList<Integer> pressedKeys) {
-		
+
 	}
 
 	/**
@@ -174,9 +174,9 @@ public class DisplayObject {
 	 * every frame.
 	 * */
 	public void draw(Graphics g) {
-		
+
 		if (displayImage != null) {
-			
+
 			/*
 			 * Get the graphics and apply this objects transformations
 			 * (rotation, etc.)
@@ -188,7 +188,7 @@ public class DisplayObject {
 			g2d.drawImage(displayImage, 0, 0,
 					(int) (getUnscaledWidth()),
 					(int) (getUnscaledHeight()), null);
-			
+
 			/*
 			 * undo the transformations so this doesn't affect other display
 			 * objects
@@ -222,7 +222,7 @@ public class DisplayObject {
 		g2d.setComposite(AlphaComposite.getInstance(3, this.oldAlpha));
 		g2d.rotate(Math.toRadians(this.getRotation()) * -1, this.pivotPoint.x * -1, this.pivotPoint.y * -1);
 	}
-	
+
 	public int getRotation() {
 		return rotation;
 	}
