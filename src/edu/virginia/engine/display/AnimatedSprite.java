@@ -34,18 +34,18 @@ public class AnimatedSprite extends Sprite
         this.startFrame = 0;
         this.endFrame = 0;
         this.setStopFrame(0);
-        this.animationSpeed = 0;
-        this.gameClock = null;
+        this.animationSpeed = 1000;
+        this.gameClock = new GameClock();
     }
 
     // Implement a method to populate the ArrayList frames with the images you will iterate through.
     // Refer to the lab slides for tips to do this.
     public void populate() throws IOException
     {
-    	BufferedImage right1 = ImageIO.read(new File("mario_right_1.png"));
-    	BufferedImage right2 = ImageIO.read(new File("mario_right_2.png"));
-    	BufferedImage left1 = ImageIO.read(new File("mario_left_1.png"));
-    	BufferedImage left2 = ImageIO.read(new File("mario_left_2.png"));
+    	BufferedImage right1 = ImageIO.read(new File("resources/mario_right_1.png"));
+    	BufferedImage right2 = ImageIO.read(new File("resources/mario_right_2.png"));
+    	BufferedImage left1 = ImageIO.read(new File("resources/mario_left_1.png"));
+    	BufferedImage left2 = ImageIO.read(new File("resources/mario_left_2.png"));
     	frames.add(right1);
     	frames.add(right2);
     	frames.add(left1);
@@ -53,17 +53,18 @@ public class AnimatedSprite extends Sprite
     }
 
     @Override
-    public void draw(Graphics g) {
-
-        setImage(this.frames.get(currentFrame));
-        gameClock.resetGameClock();
+    public void draw(Graphics g) 
+    {
+    	if (frames.size() != 0)
+    		super.setImage(this.frames.get(currentFrame));
 
         super.draw(g);
-        if(currentFrame!=endFrame){
-            currentFrame++;
-        }else{
-            currentFrame=startFrame;
-        }
+        
+//        if(currentFrame!=endFrame){
+//            this.setCurrentFrame(this.getCurrentFrame() + 1);
+//        }else{
+//        	this.setCurrentFrame(this.getStartFrame());
+//        }
 
     }
 

@@ -3,8 +3,15 @@ package edu.virginia.lab1test;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
+
+import edu.virginia.engine.display.AnimatedSprite;
+import edu.virginia.engine.display.Animation;
 import edu.virginia.engine.display.Game;
 import edu.virginia.engine.display.Sprite;
 
@@ -14,8 +21,8 @@ import edu.virginia.engine.display.Sprite;
  * */
 public class LabOneGame extends Game{
 
-	/* Create a sprite object for our game. We'll use mario */
-	Sprite mario = new Sprite("Mario", "Mario.png");
+	static /* Create a sprite object for our game. We'll use mario */
+	AnimatedSprite mario = new AnimatedSprite("Mario", "Mario.png", new Point(0,0));
 	
 	/**
 	 * Constructor. See constructor in Game.java for details on the parameters given
@@ -39,6 +46,7 @@ public class LabOneGame extends Game{
 		/* Make sure mario is not null. Sometimes Swing can auto cause an extra frame to go before everything is initialized */
 		if(mario != null) mario.update(pressedKeys);
 		
+		//Move
 		if (pressedKeys.contains(KeyEvent.VK_UP))
 			mario.setPosition(new Point(mario.getPosition().x, mario.getPosition().y - 5));
 		if (pressedKeys.contains(KeyEvent.VK_DOWN))
@@ -47,12 +55,18 @@ public class LabOneGame extends Game{
 				mario.setPosition(new Point(mario.getPosition().x + 5, mario.getPosition().y));
 		if (pressedKeys.contains(KeyEvent.VK_LEFT))
 				mario.setPosition(new Point(mario.getPosition().x - 5, mario.getPosition().y));
+		
+		// Rotate
 		if (pressedKeys.contains(KeyEvent.VK_Q))
 				mario.setRotation(mario.getRotation() + 5);
 		if (pressedKeys.contains(KeyEvent.VK_W))
 				mario.setRotation(mario.getRotation() - 5);
+		
+		// Visible
 		if (pressedKeys.contains(KeyEvent.VK_V))
 				mario.setVisible(!mario.isVisible());
+		
+		//Alpha
 		if (pressedKeys.contains(KeyEvent.VK_Z)){
 			mario.setAlpha(mario.getAlpha() + .025f);
 			if(mario.getAlpha()>1.0f){
@@ -65,6 +79,8 @@ public class LabOneGame extends Game{
 				mario.setAlpha(0.0f);
 			}
 		}
+		
+		//scale
 		if (pressedKeys.contains(KeyEvent.VK_A)) {
 			mario.setScaleX(mario.getScaleX() + .05);
 			mario.setScaleY(mario.getScaleY() + .05);
@@ -78,6 +94,7 @@ public class LabOneGame extends Game{
 			}
 		}
 		
+		// pivot point
 		if (pressedKeys.contains(KeyEvent.VK_I))
 			mario.setPivotPoint(new Point(mario.getPivotPoint().x, mario.getPivotPoint().y - 5));
 		if (pressedKeys.contains(KeyEvent.VK_K))
@@ -86,6 +103,23 @@ public class LabOneGame extends Game{
 			mario.setPivotPoint(new Point(mario.getPivotPoint().x - 5, mario.getPivotPoint().y));
 		if (pressedKeys.contains(KeyEvent.VK_L))
 			mario.setPivotPoint(new Point(mario.getPivotPoint().x + 5, mario.getPivotPoint().y));
+		
+		if (pressedKeys.contains(KeyEvent.VK_H))
+			mario.animate(0, 1);
+		if (pressedKeys.contains(KeyEvent.VK_G))
+			mario.animate(2, 3);
+		
+		System.out.println(mario.getGameClock().getElapsedTime());
+		System.out.println(mario.getAnimationSpeed());
+		if(mario.getGameClock().getElapsedTime()>mario.getAnimationSpeed()){
+			if (mario.getCurrentFrame() < mario.getEndFrame())
+				mario.setCurrentFrame(mario.getCurrentFrame() + 1);
+			else 
+				mario.setCurrentFrame(mario.getStartFrame());
+			
+        	mario.getGameClock().resetGameClock();
+		}
+		
 	}
 	
 	/**
@@ -103,10 +137,19 @@ public class LabOneGame extends Game{
 	/**
 	 * Quick main class that simply creates an instance of our game and starts the timer
 	 * that calls update() and draw() every frame
+	 * @throws IOException 
 	 * */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		LabOneGame game = new LabOneGame();
+		
+		// Set all the animation garbage here and starting info with mario
+		//Animation right = new Animation("right", 0, 1);
+		//Animation left = new Animation("left", 0, 1);
+		mario.populate();
+		mario.animate(0,1);
+		mario.setAnimationSpeed(300);
+		
+		
 		game.start();
-
 	}
 }
