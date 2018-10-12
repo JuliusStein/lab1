@@ -2,7 +2,11 @@ package edu.virginia.engine.display;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+
+import javax.imageio.ImageIO;
 
 import edu.virginia.engine.util.GameClock;
 
@@ -16,7 +20,7 @@ public class AnimatedSprite extends Sprite
     private int startFrame;
     private int endFrame;
     private int stopFrame;
-    private static final int DEFAULT_ANIMATION_SPEED = 1;
+	private static final int DEFAULT_ANIMATION_SPEED = 1;
     private int animationSpeed;
     private GameClock gameClock;
 
@@ -29,13 +33,24 @@ public class AnimatedSprite extends Sprite
         this.currentFrame = 0;
         this.startFrame = 0;
         this.endFrame = 0;
-        this.stopFrame = 0;
+        this.setStopFrame(0);
         this.animationSpeed = 0;
         this.gameClock = null;
     }
 
     // Implement a method to populate the ArrayList frames with the images you will iterate through.
     // Refer to the lab slides for tips to do this.
+    public void populate() throws IOException
+    {
+    	BufferedImage right1 = ImageIO.read(new File("mario_right_1.png"));
+    	BufferedImage right2 = ImageIO.read(new File("mario_right_2.png"));
+    	BufferedImage left1 = ImageIO.read(new File("mario_left_1.png"));
+    	BufferedImage left2 = ImageIO.read(new File("mario_left_2.png"));
+    	frames.add(right1);
+    	frames.add(right2);
+    	frames.add(left1);
+    	frames.add(left2);
+    }
 
     @Override
     public void draw(Graphics g) {
@@ -68,26 +83,26 @@ public class AnimatedSprite extends Sprite
 
     public void animate(Animation animation)
     {
-        this.startFrame = animation.getStartFrame();
-        this.endFrame = animation.getEndFrame();
+        this.setStartFrame(animation.getStartFrame());
+        this.setEndFrame(animation.getEndFrame());
     }
 
     public void animate(String id)
     {
         Animation anim = getAnimation(id);
-        this.startFrame = anim.getStartFrame();
-        this.endFrame = anim.getEndFrame();
+        this.setStartFrame(anim.getStartFrame());
+        this.setEndFrame(anim.getEndFrame());
     }
 
     public void animate(int start, int end)
     {
-        this.startFrame = start;
-        this.endFrame = end;
+        this.setStartFrame(start);
+        this.setEndFrame(end);
     }
 
     public void stopAnimation(int frame)
     {
-        this.stopFrame = frame;
+        this.setStopFrame(frame);
     }
 
     public void stopAnimation()
@@ -150,4 +165,16 @@ public class AnimatedSprite extends Sprite
     public void setGameClock(GameClock gameClock) {
         this.gameClock = gameClock;
     }
+
+	public int getStopFrame() {
+		return stopFrame;
+	}
+
+	public void setStopFrame(int stopFrame) {
+		this.stopFrame = stopFrame;
+	}
+
+	public static int getDefaultAnimationSpeed() {
+		return DEFAULT_ANIMATION_SPEED;
+	}
 }
