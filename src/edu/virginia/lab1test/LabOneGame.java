@@ -51,11 +51,15 @@ public class LabOneGame extends Game{
 			mario.setPosition(new Point(mario.getPosition().x, mario.getPosition().y - 5));
 		if (pressedKeys.contains(KeyEvent.VK_DOWN))
 				mario.setPosition(new Point(mario.getPosition().x, mario.getPosition().y + 5));
-		if (pressedKeys.contains(KeyEvent.VK_RIGHT))
-				mario.setPosition(new Point(mario.getPosition().x + 5, mario.getPosition().y));
-		if (pressedKeys.contains(KeyEvent.VK_LEFT))
-				mario.setPosition(new Point(mario.getPosition().x - 5, mario.getPosition().y));
-		
+		if (pressedKeys.contains(KeyEvent.VK_RIGHT)){
+			mario.animate(0, 1);
+			mario.setPosition(new Point(mario.getPosition().x + 5, mario.getPosition().y));
+		}
+		if (pressedKeys.contains(KeyEvent.VK_LEFT)){
+			mario.animate(2,3);
+			mario.setPosition(new Point(mario.getPosition().x - 5, mario.getPosition().y));
+		}
+
 		// Rotate
 		if (pressedKeys.contains(KeyEvent.VK_Q))
 				mario.setRotation(mario.getRotation() + 5);
@@ -147,7 +151,7 @@ public class LabOneGame extends Game{
 		//Animation left = new Animation("left", 0, 1);
 		mario.populate();
 		mario.animate(0,1);
-		mario.setAnimationSpeed(300);
+		mario.setAnimationSpeed(100);
 		
 		
 		game.start();

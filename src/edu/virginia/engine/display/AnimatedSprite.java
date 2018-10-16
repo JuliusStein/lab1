@@ -20,9 +20,12 @@ public class AnimatedSprite extends Sprite
     private int startFrame;
     private int endFrame;
     private int stopFrame;
+    private boolean isJumping;
 	private static final int DEFAULT_ANIMATION_SPEED = 1;
     private int animationSpeed;
     private GameClock gameClock;
+    private int facing; //1=right, -1=left
+    private int jumpTimer = 0;
 
     public AnimatedSprite(String ID, String fileName, Point position)
     {
@@ -35,7 +38,10 @@ public class AnimatedSprite extends Sprite
         this.endFrame = 0;
         this.setStopFrame(0);
         this.animationSpeed = 1000;
+        this.playing = false;
+        this.isJumping = false;
         this.gameClock = new GameClock();
+        this.facing = 1;
     }
 
     // Implement a method to populate the ArrayList frames with the images you will iterate through.
@@ -46,10 +52,16 @@ public class AnimatedSprite extends Sprite
     	BufferedImage right2 = ImageIO.read(new File("resources/mario_right_2.png"));
     	BufferedImage left1 = ImageIO.read(new File("resources/mario_left_1.png"));
     	BufferedImage left2 = ImageIO.read(new File("resources/mario_left_2.png"));
+        BufferedImage jumpLeft = ImageIO.read(new File("resources/mario_jumping_left.png"));
+        BufferedImage jumpRight = ImageIO.read(new File("resources/mario_jumping_right.png"));
     	frames.add(right1);
     	frames.add(right2);
     	frames.add(left1);
     	frames.add(left2);
+        frames.add(jumpRight);
+        frames.add(right1);
+        frames.add(jumpLeft);
+        frames.add(left1);
     }
 
     @Override
@@ -59,12 +71,6 @@ public class AnimatedSprite extends Sprite
     		super.setImage(this.frames.get(currentFrame));
 
         super.draw(g);
-        
-//        if(currentFrame!=endFrame){
-//            this.setCurrentFrame(this.getCurrentFrame() + 1);
-//        }else{
-//        	this.setCurrentFrame(this.getStartFrame());
-//        }
 
     }
 
@@ -111,12 +117,36 @@ public class AnimatedSprite extends Sprite
         stopAnimation(this.startFrame);
     }
 
+    public int getFacing() {
+        return facing;
+    }
+
+    public void setFacing(int facing) {
+        this.facing = facing;
+    }
+
+    public int getJumpTimer() {
+        return jumpTimer;
+    }
+
+    public void setJumpTimer(int jumpTimer) {
+        this.jumpTimer = jumpTimer;
+    }
+
     public boolean isPlaying() {
         return playing;
     }
 
     public void setPlaying(boolean playing) {
         this.playing = playing;
+    }
+
+    public boolean isJumping() {
+        return isJumping;
+    }
+
+    public void setJumping(boolean jumping) {
+        isJumping = jumping;
     }
 
     public String getFileName() {
