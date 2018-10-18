@@ -1,0 +1,67 @@
+Lab 3: Display Hierarchy
+
+Due Wednesday 2 weeks after lab at 11:59pm
+
+Overview
+Over the next 2 weeks, you & your partner will be updating your engine to support a display tree. You will do this by implementing the new DisplayObjectContainer class and modifying your other code as well. Lab slides are available here.
+
+You’ve been given 2 weeks to complete this lab because we believe you will need twice the time to complete this lab as the previous labs. Start early! Don’t wait until the last minute!
+
+
+Part 1: DisplayObjectContainer
+
+Class
+
+Implement DisplayObjectContainer class, which extends  DisplayObject (Sprite, Game, etc. should now extend DisplayObjectContainer instead).
+Your class should have a single field, a list of DisplayObject objects that are the children of this container.
+Thus,  containers  are  essentially  nodes  in  a  tree  and  this  list  is  the  list of  child  objects  (which  might  be DisplayObject type which represents a leaf node OR DisplayObjectContainer types representing another internal node).
+
+Functionality
+
+Your DisplayObjectContainer needs to support the following functionality:
+
+Your DisplayObject class  should  now  contain  a  private  reference  to  the parent  DisplayObject.
+Notice that this makes sense to put in DisplayObject (not  container) because even objects that are  not  containers  themselves  may  be  in  the  display  tree  as  leaf  nodes  and  thus  need  to potentially have a parent.
+
+Your DisplayObjectContainer class  should  contain  a list  of  DisplayObject  objects that  are  the children of this container.
+
+It should be possible for a DisplayObject (and/or a DOC) to not have an image and thus not be drawn to the screen. If this is the case though, the children should still be drawn. Only if the DOC is marked as invisible will the children also not be drawn.
+Children  (Display  Objects)  can  be added  and  removed from  this  container.  You  might  want  to provide several add and remove methods (addChild, addChildAtIndex, removeChild, removeByIndex, removeAll, etc.). Make sure there is a method for removing all children at once.
+
+A contains(DO) method returning true iff a display object is already a child of this container.
+Methods for getting a child (returns the DO itself) by string id or by index
+update()  and  draw()  methods  overridden.  This  is  a  bit  tricky  because  you  will  need  to  draw yourself,  then  draw  your  children  one  at  a  time  while  making  sure  your  transformations  are applied to your children. Refer to the lab slides for a guide to the draw method (update is similar).
+A getChildren() getter that returns all of this object’s children.
+
+
+Part 2: DisplayObject Coordinate Conversions
+
+Implement a method to convert from a local to global coordinate system and another method to convert a global to local coordinate system. Refer to the lab sides for a guide on how to do this.
+
+Part 3: Test Demo
+
+Using the DisplayObject Hierarchy you implemented, create a solar system simulator LabThreeSimulator.java. This class will be very similar to the other Game ones you have done in previous labs, except you are adding different DisplayObjects.
+
+You don’t need all eight/nine planets and their moons. Your solar system simulator just has to have the following features:
+
+Make a sun sprite that is the root node of the whole system.
+Planets should be children of the sun.
+Moons of planets should be children of the planets
+The whole system should move continuously, which means that the planets orbit the Sun and that the moons orbit the planets as soon as you run the simulator (i.e. doesn't require a trigger from you) and does not stop.
+The  planets  should  rotate  around  their  parent  at  different  rates, which means you should have at least 2 planets to show they move at different rates.  Think  carefully about how to do this.
+Extra Credit: Make planets and moons have elliptical orbits! Only eligible to students who have completed the required elements below.
+Your demo should support the following commands:
+
+Q&W: Zooms in and out towards center of sun OR center of current screen position
+Arrows: Pans up/down/left/right around the system.
+A&S: Rotates the system around the sun’s center point counterclockwise and clockwise respectively:
+If you have the Sun already rotating when you start the simulator, A & S will first convert to the correct direction and accelerate the rotation of the Sun (and its children) CCW or CW respectively.
+If you have the Sun staying still while the objects rotate around it, then A & S will cause the Sun (and its children) to rotate either CCW or CW respectively.
+
+
+Deliverables
+
+Turn in a zip file (java.zip) of your IDEA project in your svn repo with all your java assets (i.e. include the folders src, resources, etc) so we have everything we need to run your simulator. Include a README.txt if necessary. Only one partner needs to turn in the zip file; the other partner just has to submit a partner.txt file that lets us know who your partner is.
+
+
+Published by Google Drive–Report Abuse–Updated automatically every 5 minutes

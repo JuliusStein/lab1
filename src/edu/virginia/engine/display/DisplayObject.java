@@ -17,7 +17,7 @@ public class DisplayObject {
 
 	/* All DisplayObject have a unique id */
 	private String id;
-
+	private DisplayObject parent;
 	private Point position;
 	private Point pivotPoint;
 	private int rotation;
@@ -85,6 +85,7 @@ public class DisplayObject {
 		this.setOldAlpha(0.0f);
 		this.setScaleX(1.0);
 		this.setScaleY(1.0);
+		this.parent = null;
 	}
 
 	public DisplayObject(String id, String fileName) {
@@ -98,6 +99,7 @@ public class DisplayObject {
 		this.setOldAlpha(0.0f);
 		this.setScaleX(1.0);
 		this.setScaleY(1.0);
+		this.parent = null;
 	}
 
 	public void setId(String id) {
@@ -246,6 +248,15 @@ public class DisplayObject {
 
 	public void setPosition(Point position) {
 		this.position = position;
+	}
+
+
+	public DisplayObject getParent() {
+		return parent;
+	}
+
+	public void setParent(DisplayObject parent) {
+		this.parent = parent;
 	}
 
 }
