@@ -12,12 +12,12 @@ public class DisplayObjectContainer extends DisplayObject{
 
     public DisplayObjectContainer(String ID){
         super(ID);
-        this.children = null;
+        this.children = new ArrayList<DisplayObject>();
     }
 
     public DisplayObjectContainer(String ID, String fileName){
         super(ID, fileName);
-        this.children = null;
+        this.children = new ArrayList<DisplayObject>();
     }
 
     public void addChild(DisplayObject child){
@@ -92,12 +92,9 @@ public class DisplayObjectContainer extends DisplayObject{
     public void update(ArrayList<Integer> pressedKeys){
         super.update(pressedKeys);
 
-        for(int i=0; i<this.children.size(); i++){
-            getChildAtIndex(i).update(pressedKeys);
-        }
-    }
-
-    public static void main(String[] args) throws IOException {
+            for(int i=0; i<this.children.size(); i++){
+                getChildAtIndex(i).update(pressedKeys);
+            }
 
     }
 }
