@@ -22,6 +22,7 @@ public class DisplayObjectContainer extends DisplayObject{
 
     public void addChild(DisplayObject child){
         this.children.add(child);
+        child.setParent(this);
     }
 
     public void addChildAtIndex(DisplayObject child, int index){
@@ -79,13 +80,13 @@ public class DisplayObjectContainer extends DisplayObject{
         super.draw(g);
 
         Graphics2D g2d = (Graphics2D) g;
-        applyTransformations(g2d);
+        super.applyTransformations(g2d);
 
         for(int i=0; i<this.children.size(); i++){
             getChildAtIndex(i).draw(g);
         }
 
-        reverseTransformations(g2d);
+        super.reverseTransformations(g2d);
     }
 
     @Override

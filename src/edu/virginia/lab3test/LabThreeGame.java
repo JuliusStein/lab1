@@ -22,13 +22,16 @@ public class LabThreeGame extends Game{
             AnimatedSprite mario = new AnimatedSprite("Mario", "Mario.png", new Point(0,0));
     static DisplayObjectContainer sun = new DisplayObjectContainer("sun", "sun.png");
     static DisplayObject earth = new DisplayObject("earth", "earth.png");
+    static DisplayObject mars = new DisplayObject("mars", "mars.png");
+    static DisplayObjectContainer jupiter = new DisplayObjectContainer("jupiter", "jupiter.png");
+    static DisplayObject moon = new DisplayObject("moon", "moon.png");
 
 
     /**
      * Constructor. See constructor in Game.java for details on the parameters given
      * */
     public LabThreeGame() {
-        super("Lab Three Test Game", 500, 500);
+        super("Lab Three Test Game", 800, 800);
     }
 
     /**
@@ -47,6 +50,15 @@ public class LabThreeGame extends Game{
             sun.setPosition(new Point(sun.getPosition().x - 5, sun.getPosition().y));
         if (pressedKeys.contains(KeyEvent.VK_LEFT))
             sun.setPosition(new Point(sun.getPosition().x + 5, sun.getPosition().y));
+        
+        if (pressedKeys.contains(KeyEvent.VK_Q))
+        {
+        	sun.setRotation(sun.getRotation() + 2);
+//        	earth.setPivotPoint(sun.getPivotPoint());
+//        	earth.setRotation(earth.getRotation() - 1);
+        }
+        if (pressedKeys.contains(KeyEvent.VK_W))
+        	sun.setRotation(sun.getRotation() - 2);
 
     }
 
@@ -68,14 +80,18 @@ public class LabThreeGame extends Game{
      * @throws IOException
      * */
     public static void main(String[] args) throws IOException {
-        LabTwoGame game = new LabTwoGame();
-        sun.setScaleX(.5);
-        sun.setScaleY(.5);
-        sun.setPosition(new Point(180, 180));
-
-//		earth.setScaleX(.2);
-//		earth.setScaleY(.2);
+        LabThreeGame game = new LabThreeGame();
+        sun.setPosition(new Point(350, 350));
+        sun.setPivotPoint(new Point(50, 50));
+        
+        jupiter.setPosition(new Point(-200, 0));
+        mars.setPosition(new Point(50, 100));
+        
         sun.addChild(earth);
+        sun.addChild(mars);
+        sun.addChild(jupiter);
+        jupiter.addChild(moon);
+        //moon.setPosition(new Point(-20, -20));
 
         game.start();
     }
