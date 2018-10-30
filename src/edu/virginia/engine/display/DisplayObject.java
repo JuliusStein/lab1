@@ -258,5 +258,27 @@ public class DisplayObject {
 	public void setParent(DisplayObject parent) {
 		this.parent = parent;
 	}
+	
+	public Point localToGlobal(Point p)
+	{
+		Point containerLoc = null;
+		if (this.getParent() instanceof DisplayObject)
+			containerLoc = this.getParent().localToGlobal(p);
+		else
+			containerLoc = new Point(this.getPosition().x + this.getParent().getPosition().x, 
+							 		 this.getPosition().y + this.getParent().getPosition().y);
+		return containerLoc;
+	}
+	
+	public Point globalToLocal(Point p)
+	{
+		Point containerLoc = null;
+		if (this.getParent() instanceof DisplayObject)
+			containerLoc = this.getParent().localToGlobal(p);
+		else
+			containerLoc = new Point(this.getParent().getPosition().x - this.getPosition().x,
+							 		 this.getParent().getPosition().y - this.getPosition().y);
+		return containerLoc;
+	}
 
 }
