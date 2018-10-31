@@ -1,12 +1,8 @@
 package edu.virginia.lab3test;
 
-import edu.virginia.engine.display.AnimatedSprite;
 import edu.virginia.engine.display.DisplayObject;
 import edu.virginia.engine.display.DisplayObjectContainer;
 import edu.virginia.engine.display.Game;
-import edu.virginia.engine.display.Sprite;
-import edu.virginia.lab2test.LabTwoGame;
-
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
@@ -18,8 +14,6 @@ import java.util.ArrayList;
  * */
 public class LabThreeGame extends Game{
 
-    static /* Create a sprite object for our game. We'll use mario */
-            AnimatedSprite mario = new AnimatedSprite("Mario", "Mario.png", new Point(0,0));
     static DisplayObjectContainer sun = new DisplayObjectContainer("sun", "sun.png");
     static DisplayObject earth = new DisplayObject("earth", "earth.png");
     static DisplayObject mars = new DisplayObject("mars", "mars.png");
@@ -53,13 +47,17 @@ public class LabThreeGame extends Game{
         
         if (pressedKeys.contains(KeyEvent.VK_Q))
         {
-        	sun.setRotation(sun.getRotation() + 2);
-//        	earth.setPivotPoint(sun.getPivotPoint());
-//        	earth.setRotation(earth.getRotation() - 1);
+        	//sun.setRotation(sun.getRotation() + 2);
+        	//earth.setPivotPoint(new Point(sun.getPosition().x, sun.getPosition().y));
+        	earth.setRotation(earth.getRotation() + 2);
+        	//mars.setPivotPoint(new Point(sun.getPosition().x, sun.getPosition().y));
+        	mars.setRotation(mars.getRotation() + 2);
+        	//jupiter.setPivotPoint(new Point(0, 0));
+        	jupiter.setRotation(jupiter.getRotation() + 2);
         }
-        if (pressedKeys.contains(KeyEvent.VK_W))
-        	sun.setRotation(sun.getRotation() - 2);
-
+        //if (pressedKeys.contains(KeyEvent.VK_W))
+        //	sun.setRotation(sun.getRotation() - 2);
+        
     }
 
     /**
@@ -82,7 +80,7 @@ public class LabThreeGame extends Game{
     public static void main(String[] args) throws IOException {
         LabThreeGame game = new LabThreeGame();
         sun.setPosition(new Point(350, 350));
-        sun.setPivotPoint(new Point(50, 50));
+        //sun.setPivotPoint(new Point(50, 50));
         
         jupiter.setPosition(new Point(-200, 0));
         mars.setPosition(new Point(50, 100));
@@ -91,6 +89,15 @@ public class LabThreeGame extends Game{
         sun.addChild(mars);
         sun.addChild(jupiter);
         jupiter.addChild(moon);
+        
+//        earth.setPivotPoint(new Point(400, 400));
+//        mars.setPivotPoint(new Point(400, 400));
+//        jupiter.setPivotPoint(new Point(400, 400));
+        
+        System.out.println(earth.getPivotPoint());
+        System.out.println(mars.getPivotPoint());
+        System.out.println(jupiter.getPivotPoint());
+        
         //moon.setPosition(new Point(-20, -20));
 
         game.start();

@@ -265,9 +265,10 @@ public class DisplayObject {
 		Point containerLoc = null;
 		if (this.getParent() instanceof DisplayObject)
 			containerLoc = this.getParent().localToGlobal(p);
-		else
-			containerLoc = new Point(this.getPosition().x + this.getParent().getPosition().x, 
-							 		 this.getPosition().y + this.getParent().getPosition().y);
+		else 
+			if (this.getParent() != null)
+				containerLoc = new Point(this.getPosition().x + this.getParent().getPosition().x, 
+										 this.getPosition().y + this.getParent().getPosition().y);
 		return containerLoc;
 	}
 	
@@ -277,8 +278,9 @@ public class DisplayObject {
 		if (this.getParent() instanceof DisplayObject)
 			containerLoc = this.getParent().localToGlobal(p);
 		else
-			containerLoc = new Point(this.getParent().getPosition().x - this.getPosition().x,
-							 		 this.getParent().getPosition().y - this.getPosition().y);
+			if (this.getParent() != null)
+				containerLoc = new Point(this.getParent().getPosition().x - this.getPosition().x,
+								 		 this.getParent().getPosition().y - this.getPosition().y);
 		return containerLoc;
 	}
 
