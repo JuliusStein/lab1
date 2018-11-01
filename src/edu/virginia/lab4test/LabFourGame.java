@@ -1,4 +1,4 @@
-package edu.virginia.lab2test;
+package edu.virginia.lab4test;
 
 import edu.virginia.engine.display.AnimatedSprite;
 import edu.virginia.engine.display.Game;
@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * Example game that utilizes our engine. We can create a simple prototype game with just a couple lines of code
  * although, for now, it won't be a very fun game :)
  * */
-public class LabTwoGame extends Game{
+public class LabFourGame extends Game{
 
 	static /* Create a sprite object for our game. We'll use mario */
 	AnimatedSprite mario = new AnimatedSprite("Mario", "Mario.png", new Point(0,0));
@@ -21,8 +21,8 @@ public class LabTwoGame extends Game{
 	/**
 	 * Constructor. See constructor in Game.java for details on the parameters given
 	 * */
-	public LabTwoGame() {
-		super("Lab Two Test Game", 1000, 300);
+	public LabFourGame() {
+		super("Lab Four Test Game", 1000, 300);
 	}
 	
 	/**
@@ -77,6 +77,14 @@ public class LabTwoGame extends Game{
 				mario.setPlaying(true);
 				mario.setFacing(-1);
 				mario.setPosition(new Point(mario.getPosition().x - 5, mario.getPosition().y));
+			}
+			
+//			if (pressedKeys.contains(KeyEvent.VK_UP)) {
+//				mario.setPosition(new Point(mario.getPosition().x, mario.getPosition().y - 5));
+//			}
+			
+			if (pressedKeys.contains(KeyEvent.VK_DOWN)) {
+				mario.setPosition(new Point(mario.getPosition().x, mario.getPosition().y + 5));
 			}
 
 			//Animation Speed
@@ -149,7 +157,7 @@ public class LabTwoGame extends Game{
 	 * @throws IOException 
 	 * */
 	public static void main(String[] args) throws IOException {
-		LabTwoGame game = new LabTwoGame();
+		LabFourGame game = new LabFourGame();
 
 		mario.setPosition(new Point(mario.getPosition().x + 5, mario.getPosition().y+50));
 

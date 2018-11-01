@@ -262,25 +262,15 @@ public class DisplayObject {
 	
 	public Point localToGlobal(Point p)
 	{
-		Point containerLoc = null;
-		if (this.getParent() instanceof DisplayObject)
-			containerLoc = this.getParent().localToGlobal(p);
-		else 
-			if (this.getParent() != null)
-				containerLoc = new Point(this.getPosition().x + this.getParent().getPosition().x, 
-										 this.getPosition().y + this.getParent().getPosition().y);
+		Point containerLoc = new Point(this.getPosition().x + this.getParent().getPosition().x,
+				this.getPosition().y + this.getParent().getPosition().y);
 		return containerLoc;
 	}
 	
 	public Point globalToLocal(Point p)
 	{
-		Point containerLoc = null;
-		if (this.getParent() instanceof DisplayObject)
-			containerLoc = this.getParent().localToGlobal(p);
-		else
-			if (this.getParent() != null)
-				containerLoc = new Point(this.getParent().getPosition().x - this.getPosition().x,
-								 		 this.getParent().getPosition().y - this.getPosition().y);
+		Point containerLoc = new Point(this.getPosition().x - this.getParent().getPosition().x,
+				this.getPosition().y - this.getParent().getPosition().y);
 		return containerLoc;
 	}
 
