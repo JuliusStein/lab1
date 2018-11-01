@@ -82,8 +82,28 @@ public class LabThreeGame extends Game{
         earth.setRotation(earth.getRotation() + (2*getRotationDirection()));
         mars.setRotation(mars.getRotation() + (2*getRotationDirection()));
         jupiter.setRotation(jupiter.getRotation() + (2*getRotationDirection()));
+        moon.setPivotPoint(new Point(jupiter.getPosition().x, jupiter.getPosition().y));
+        moon.setPosition(new Point(jupiter.getPosition().x+350, jupiter.getPosition().y+350));
+        moon.setRotation(moon.getRotation() + (2*getRotationDirection()));
+        //moon.setRotation(jupiter.getRotation());
+        System.out.println(jupiter.getPosition());
+        System.out.println(jupiter.getPivotPoint());
+        System.out.println(moon.getPosition());
+        System.out.println(moon.getPivotPoint());
+
+
+        if (pressedKeys.contains(KeyEvent.VK_W))
+        {
+            if(!((solarSystem.getScaleX()<=0.05)||(solarSystem.getScaleY()<=0.05))){
+                solarSystem.setScaleX(solarSystem.getScaleX()-0.05);
+                solarSystem.setScaleY(solarSystem.getScaleY()-0.05);
+            }
+        }
+
+        earth.setRotation(earth.getRotation() + (2*getRotationDirection()));
+        mars.setRotation(mars.getRotation() + (2*getRotationDirection()));
+        jupiter.setRotation(jupiter.getRotation() + (2*getRotationDirection()));
         moon.setRotation(moon.getRotation() + (1*getRotationDirection()));
-        
     }
 
     /**
@@ -132,6 +152,12 @@ public class LabThreeGame extends Game{
         earth.setPivotPoint(new Point(125, 125));
         mars.setPivotPoint(new Point(100, 100));
         jupiter.setPivotPoint(new Point(300, 300));
+        moon.setPivotPoint(new Point(jupiter.getPosition().x, jupiter.getPosition().y));
+
+        System.out.println(jupiter.getPosition());
+        System.out.println(jupiter.getPivotPoint());
+        System.out.println(moon.getPosition());
+        System.out.println(moon.getPivotPoint());
         moon.setPivotPoint(new Point(jupiter.getPosition().x, jupiter.getPosition().x));
 
         System.out.println(earth.localToGlobal(earth.getPivotPoint()));
