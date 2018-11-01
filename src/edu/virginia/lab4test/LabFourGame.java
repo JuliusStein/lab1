@@ -2,6 +2,7 @@ package edu.virginia.lab4test;
 
 import edu.virginia.engine.display.AnimatedSprite;
 import edu.virginia.engine.display.Game;
+import edu.virginia.engine.display.SoundManager;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -16,6 +17,7 @@ public class LabFourGame extends Game{
 
 	static /* Create a sprite object for our game. We'll use mario */
 	AnimatedSprite mario = new AnimatedSprite("Mario", "Mario.png", new Point(0,0));
+	static SoundManager sound = new SoundManager();
 
 
 	/**
@@ -64,6 +66,7 @@ public class LabFourGame extends Game{
 				}else if(mario.getFacing()==-1){
 					//mario.animate(6,7);
 				}
+				sound.playSoundEffect("jump");
 				mario.setJumpTimer(7);
 			}
 			if (pressedKeys.contains(KeyEvent.VK_RIGHT)) {
@@ -86,6 +89,22 @@ public class LabFourGame extends Game{
 			if (pressedKeys.contains(KeyEvent.VK_DOWN)) {
 				mario.setPosition(new Point(mario.getPosition().x, mario.getPosition().y + 5));
 			}
+			
+			// Rotate
+			if (pressedKeys.contains(KeyEvent.VK_Q))
+					mario.setRotation(mario.getRotation() + 5);
+			if (pressedKeys.contains(KeyEvent.VK_W))
+					mario.setRotation(mario.getRotation() - 5);
+			
+			// pivot point
+			if (pressedKeys.contains(KeyEvent.VK_I))
+				mario.setPivotPoint(new Point(mario.getPivotPoint().x, mario.getPivotPoint().y - 5));
+			if (pressedKeys.contains(KeyEvent.VK_K))
+				mario.setPivotPoint(new Point(mario.getPivotPoint().x, mario.getPivotPoint().y + 5));
+			if (pressedKeys.contains(KeyEvent.VK_J))
+				mario.setPivotPoint(new Point(mario.getPivotPoint().x - 5, mario.getPivotPoint().y));
+			if (pressedKeys.contains(KeyEvent.VK_L))
+				mario.setPivotPoint(new Point(mario.getPivotPoint().x + 5, mario.getPivotPoint().y));
 
 			//Animation Speed
 			if (pressedKeys.contains(KeyEvent.VK_X)) {
@@ -158,8 +177,15 @@ public class LabFourGame extends Game{
 	 * */
 	public static void main(String[] args) throws IOException {
 		LabFourGame game = new LabFourGame();
+		
+		sound.loadSoundEffect("jump", "resources/jump.wav");
+		sound.loadSoundEffect("death", "resources/death.wav");
+		sound.loadSoundEffect("win", "resources/win.wav");
+		sound.loadMusic("theme", "resources/theme.wav");
+		
+		sound.playMusic("theme");
 
-		mario.setPosition(new Point(mario.getPosition().x + 5, mario.getPosition().y+50));
+		mario.setPosition(new Point(mario.getPosition().x + 5, mario.getPosition().y + 50));
 
 		mario.populate();
 		mario.animate(0,1);

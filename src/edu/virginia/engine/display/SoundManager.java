@@ -9,22 +9,25 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+
 public class SoundManager {
 	
 	private HashMap<String, File> soundMap;
 	
-	private SoundManager()
+	public SoundManager()
 	{
 		this.soundMap = new HashMap<String, File>();
 	}
 	
-	public void LoadSoundEffect(String id, String filename)
+	public void loadSoundEffect(String id, String filename)
 	{
 		File file = new File(filename);
 		this.soundMap.put(id, file);
 	}
 	
-	public void PlaySoundEffect(String id)
+	public void playSoundEffect(String id)
 	{
 		try 
 		{
@@ -36,16 +39,15 @@ public class SoundManager {
 		{
 			e.printStackTrace();
 		}
-		
 	}
 
-	public void LoadMusic(String id, String filename)
+	public void loadMusic(String id, String filename)
 	{ // ask about this description?
 		File file = new File(filename);
 		this.soundMap.put(id, file);
 	}
 	
-	public void PlayMusic(String id)
+	public void playMusic(String id)
 	{ // why would this be different than sound effect
 		try 
 		{
