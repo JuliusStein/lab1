@@ -14,18 +14,28 @@ import java.util.ArrayList;
  * */
 public class LabThreeGame extends Game{
 
+    static DisplayObjectContainer solarSystem = new DisplayObjectContainer("solarSystem");
     static DisplayObjectContainer sun = new DisplayObjectContainer("sun", "sun.png");
     static DisplayObject earth = new DisplayObject("earth", "earth.png");
     static DisplayObject mars = new DisplayObject("mars", "mars.png");
     static DisplayObjectContainer jupiter = new DisplayObjectContainer("jupiter", "jupiter.png");
     static DisplayObject moon = new DisplayObject("moon", "moon.png");
 
+    private int rotationDirection = 1;
+
+    public int getRotationDirection() {
+        return rotationDirection;
+    }
+
+    public void setRotationDirection(int rotationDirection) {
+        this.rotationDirection = rotationDirection;
+    }
 
     /**
      * Constructor. See constructor in Game.java for details on the parameters given
      * */
     public LabThreeGame() {
-        super("Lab Three Test Game", 800, 800);
+        super("Lab Three Test Game", 1400, 900);
     }
 
     /**
@@ -37,27 +47,49 @@ public class LabThreeGame extends Game{
         super.update(pressedKeys);
 
         if (pressedKeys.contains(KeyEvent.VK_UP))
-            sun.setPosition(new Point(sun.getPosition().x, sun.getPosition().y + 5));
+            solarSystem.setPosition(new Point(solarSystem.getPosition().x, solarSystem.getPosition().y + 5));
         if (pressedKeys.contains(KeyEvent.VK_DOWN))
-            sun.setPosition(new Point(sun.getPosition().x, sun.getPosition().y - 5));
+            solarSystem.setPosition(new Point(solarSystem.getPosition().x, solarSystem.getPosition().y - 5));
         if (pressedKeys.contains(KeyEvent.VK_RIGHT))
-            sun.setPosition(new Point(sun.getPosition().x - 5, sun.getPosition().y));
+            solarSystem.setPosition(new Point(solarSystem.getPosition().x - 5, solarSystem.getPosition().y));
         if (pressedKeys.contains(KeyEvent.VK_LEFT))
-            sun.setPosition(new Point(sun.getPosition().x + 5, sun.getPosition().y));
+            solarSystem.setPosition(new Point(solarSystem.getPosition().x + 5, solarSystem.getPosition().y));
         
+        if (pressedKeys.contains(KeyEvent.VK_A))
+        {
+        	setRotationDirection(-1);
+        }
+
+        if (pressedKeys.contains(KeyEvent.VK_S))
+        {
+            setRotationDirection(1);
+        }
+
         if (pressedKeys.contains(KeyEvent.VK_Q))
         {
-        	//sun.setRotation(sun.getRotation() + 2);
-        	//earth.setPivotPoint(new Point(sun.getPosition().x, sun.getPosition().y));
-        	earth.setRotation(earth.getRotation() + 2);
-        	//mars.setPivotPoint(new Point(sun.getPosition().x, sun.getPosition().y));
-        	mars.setRotation(mars.getRotation() + 2);
-        	//jupiter.setPivotPoint(new Point(0, 0));
-        	jupiter.setRotation(jupiter.getRotation() + 2);
+            solarSystem.setScaleX(solarSystem.getScaleX()+0.05);
+            solarSystem.setScaleY(solarSystem.getScaleY()+0.05);
         }
-        //if (pressedKeys.contains(KeyEvent.VK_W))
-        //	sun.setRotation(sun.getRotation() - 2);
-        
+
+        if (pressedKeys.contains(KeyEvent.VK_W))
+        {
+            if(!((solarSystem.getScaleX()<=0.05)||(solarSystem.getScaleY()<=0.05))){
+                solarSystem.setScaleX(solarSystem.getScaleX()-0.05);
+                solarSystem.setScaleY(solarSystem.getScaleY()-0.05);
+            }
+        }
+
+        earth.setRotation(earth.getRotation() + (2*getRotationDirection()));
+        mars.setRotation(mars.getRotation() + (2*getRotationDirection()));
+        jupiter.setRotation(jupiter.getRotation() + (2*getRotationDirection()));
+        moon.setPivotPoint(new Point(jupiter.getPosition().x, jupiter.getPosition().y));
+        moon.setPosition(new Point(jupiter.getPosition().x+350, jupiter.getPosition().y+350));
+        moon.setRotation(moon.getRotation() + (2*getRotationDirection()));
+        //moon.setRotation(jupiter.getRotation());
+        System.out.println(jupiter.getPosition());
+        System.out.println(jupiter.getPivotPoint());
+        System.out.println(moon.getPosition());
+        System.out.println(moon.getPivotPoint());
     }
 
     /**
@@ -69,7 +101,8 @@ public class LabThreeGame extends Game{
         super.draw(g);
 
         /* Same, just check for null in case a frame gets thrown in before Mario is initialized */
-        if (sun != null) sun.draw(g);
+        if (solarSystem != null) solarSystem.draw(g);
+
     }
 
     /**
@@ -79,24 +112,40 @@ public class LabThreeGame extends Game{
      * */
     public static void main(String[] args) throws IOException {
         LabThreeGame game = new LabThreeGame();
-        sun.setPosition(new Point(350, 350));
+        solarSystem.setPosition(new Point(700, 450));
+        sun.setPosition(new Point(-50, -50));
+
         //sun.setPivotPoint(new Point(50, 50));
         
-        jupiter.setPosition(new Point(-200, 0));
-        mars.setPosition(new Point(50, 100));
-        
+
+        //mars.setPosition(new Point(50, 100));
+        solarSystem.addChild(sun);
+        sun.setParent(solarSystem);
         sun.addChild(earth);
+        earth.setParent(sun);
         sun.addChild(mars);
+        mars.setParent(sun);
         sun.addChild(jupiter);
+        jupiter.setParent(sun);
         jupiter.addChild(moon);
-        
-//        earth.setPivotPoint(new Point(400, 400));
-//        mars.setPivotPoint(new Point(400, 400));
-//        jupiter.setPivotPoint(new Point(400, 400));
-        
-        System.out.println(earth.getPivotPoint());
-        System.out.println(mars.getPivotPoint());
+        moon.setParent(jupiter);
+
+        earth.setPosition(new Point(-175,-175));
+        mars.setPosition(new Point(-150,-150));
+        jupiter.setPosition(new Point(-350, -350));
+        moon.setPosition(new Point(0,0));
+
+        earth.setPivotPoint(new Point(125, 125));
+        mars.setPivotPoint(new Point(100, 100));
+        jupiter.setPivotPoint(new Point(300, 300));
+        moon.setPivotPoint(new Point(jupiter.getPosition().x, jupiter.getPosition().y));
+
+        System.out.println(jupiter.getPosition());
         System.out.println(jupiter.getPivotPoint());
+        System.out.println(moon.getPosition());
+        System.out.println(moon.getPivotPoint());
+
+        //System.out.println(jupiter.getPivotPoint());
         
         //moon.setPosition(new Point(-20, -20));
 
