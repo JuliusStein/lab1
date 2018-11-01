@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.awt.geom.Area;
 
 
 import javax.imageio.ImageIO;
@@ -26,6 +27,7 @@ public class DisplayObject {
 	private float oldAlpha;
 	private double scaleX;
 	private double scaleY;
+	private Shape hitBox;
 
 	public boolean isVisible() {
 		return visible;
@@ -86,6 +88,10 @@ public class DisplayObject {
 		this.setScaleX(1.0);
 		this.setScaleY(1.0);
 		this.parent = null;
+		if (displayImage != null)
+			this.setHitBox(new Rectangle(this.position.x, this.position.y, displayImage.getWidth(), displayImage.getHeight()));
+		else
+			this.setHitBox(new Rectangle(this.position.x, this.position.y, 0, 0));
 	}
 
 	public DisplayObject(String id, String fileName) {
@@ -100,6 +106,7 @@ public class DisplayObject {
 		this.setScaleX(1.0);
 		this.setScaleY(1.0);
 		this.parent = null;
+		this.setHitBox(new Rectangle(this.position.x, this.position.y, displayImage.getWidth(), displayImage.getHeight()));
 	}
 
 	public void setId(String id) {
@@ -221,7 +228,7 @@ public class DisplayObject {
 	protected void reverseTransformations(Graphics2D g2d) {
 		//g2d.rotate(Math.toRadians(this.getRotation()) * -1, this.pivotPoint.x, this.pivotPoint.y);
 		g2d.setComposite(AlphaComposite.getInstance(3, this.oldAlpha));
-		g2d.scale((this.scaleX * -1),(this.scaleY * -1));
+		g2d.scale(1 / this.scaleX, 1 / this.scaleY);
 		g2d.rotate(Math.toRadians(this.getRotation()) * -1, this.pivotPoint.x, this.pivotPoint.y);
 		g2d.translate(this.position.x * -1, this.position.y * -1);
 
@@ -249,6 +256,8 @@ public class DisplayObject {
 
 	public void setPosition(Point position) {
 		this.position = position;
+		if (displayImage != null)
+			this.hitBox = new Rectangle(position.x, position.y, displayImage.getWidth(), displayImage.getHeight());
 	}
 
 
@@ -272,6 +281,21 @@ public class DisplayObject {
 		Point containerLoc = new Point(this.getPosition().x - this.getParent().getPosition().x,
 				this.getPosition().y - this.getParent().getPosition().y);
 		return containerLoc;
+	}
+
+	public Shape getHitBox() {
+		return hitBox;
+	}
+
+	public void setHitBox(Shape hitBox) {
+		this.hitBox = hitBox;
+	}
+	
+	public boolean collidesWith(DisplayObject other)
+	{
+		Area areaA = new Area(this.getHitBox());
+		areaA.intersect(new Area(other.getHitBox()));
+		return !areaA.isEmpty();
 	}
 
 }

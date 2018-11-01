@@ -9,9 +9,6 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-
 public class SoundManager {
 	
 	private HashMap<String, File> soundMap;

@@ -3,6 +3,7 @@ package edu.virginia.lab4test;
 import edu.virginia.engine.display.AnimatedSprite;
 import edu.virginia.engine.display.Game;
 import edu.virginia.engine.display.SoundManager;
+import edu.virginia.engine.display.Sprite;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -17,8 +18,10 @@ public class LabFourGame extends Game{
 
 	static /* Create a sprite object for our game. We'll use mario */
 	AnimatedSprite mario = new AnimatedSprite("Mario", "Mario.png", new Point(0,0));
+	static Sprite goomba = new Sprite("goomba", "goomba.png");
+	static Sprite flag = new Sprite("flag", "flagpole.png");
 	static SoundManager sound = new SoundManager();
-
+	static int points = 0;
 
 	/**
 	 * Constructor. See constructor in Game.java for details on the parameters given
@@ -156,6 +159,12 @@ public class LabFourGame extends Game{
         	mario.getGameClock().resetGameClock();
 		}
 		
+		if (mario.collidesWith(goomba))
+			points -= 1;
+		
+		if (mario.collidesWith(flag))
+			points += 100000000;
+		
 	}
 	
 	/**
@@ -167,7 +176,10 @@ public class LabFourGame extends Game{
 		super.draw(g);
 		
 		/* Same, just check for null in case a frame gets thrown in before Mario is initialized */
+		if(goomba != null) goomba.draw(g);
+		if(flag != null) flag.draw(g);
 		if(mario != null) mario.draw(g);
+		g.drawString(Integer.toString(points), 10, 20);
 	}
 
 	/**
@@ -178,6 +190,12 @@ public class LabFourGame extends Game{
 	public static void main(String[] args) throws IOException {
 		LabFourGame game = new LabFourGame();
 		
+		/*TODO: 
+			- change collides with or box for rotation
+			- point structure?
+			- win score/screen
+			- change hitbox based on scale */
+		
 		sound.loadSoundEffect("jump", "resources/jump.wav");
 		sound.loadSoundEffect("death", "resources/death.wav");
 		sound.loadSoundEffect("win", "resources/win.wav");
@@ -186,11 +204,12 @@ public class LabFourGame extends Game{
 		sound.playMusic("theme");
 
 		mario.setPosition(new Point(mario.getPosition().x + 5, mario.getPosition().y + 50));
+		goomba.setPosition(new Point(500, 150));
+		flag.setPosition(new Point(900, 0));
 
 		mario.populate();
 		mario.animate(0,1);
 		mario.setAnimationSpeed(100);
-		
 		
 		game.start();
 	}
