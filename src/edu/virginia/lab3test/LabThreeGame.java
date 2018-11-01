@@ -90,6 +90,20 @@ public class LabThreeGame extends Game{
         System.out.println(jupiter.getPivotPoint());
         System.out.println(moon.getPosition());
         System.out.println(moon.getPivotPoint());
+
+
+        if (pressedKeys.contains(KeyEvent.VK_W))
+        {
+            if(!((solarSystem.getScaleX()<=0.05)||(solarSystem.getScaleY()<=0.05))){
+                solarSystem.setScaleX(solarSystem.getScaleX()-0.05);
+                solarSystem.setScaleY(solarSystem.getScaleY()-0.05);
+            }
+        }
+
+        earth.setRotation(earth.getRotation() + (2*getRotationDirection()));
+        mars.setRotation(mars.getRotation() + (2*getRotationDirection()));
+        jupiter.setRotation(jupiter.getRotation() + (2*getRotationDirection()));
+        moon.setRotation(moon.getRotation() + (1*getRotationDirection()));
     }
 
     /**
@@ -144,6 +158,10 @@ public class LabThreeGame extends Game{
         System.out.println(jupiter.getPivotPoint());
         System.out.println(moon.getPosition());
         System.out.println(moon.getPivotPoint());
+        moon.setPivotPoint(new Point(jupiter.getPosition().x, jupiter.getPosition().x));
+
+        System.out.println(earth.localToGlobal(earth.getPivotPoint()));
+        System.out.println(earth.localToGlobal(earth.getPosition()));
 
         //System.out.println(jupiter.getPivotPoint());
         
