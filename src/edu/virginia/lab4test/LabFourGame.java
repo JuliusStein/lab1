@@ -4,6 +4,9 @@ import edu.virginia.engine.display.AnimatedSprite;
 import edu.virginia.engine.display.Game;
 import edu.virginia.engine.display.SoundManager;
 import edu.virginia.engine.display.Sprite;
+import java.awt.Rectangle;
+import java.awt.Shape;
+import java.awt.geom.AffineTransform;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -95,9 +98,13 @@ public class LabFourGame extends Game{
 			
 			// Rotate
 			if (pressedKeys.contains(KeyEvent.VK_Q))
+			{
 					mario.setRotation(mario.getRotation() + 5);
+			}
 			if (pressedKeys.contains(KeyEvent.VK_W))
+			{
 					mario.setRotation(mario.getRotation() - 5);
+			}
 			
 			// pivot point
 			if (pressedKeys.contains(KeyEvent.VK_I))
@@ -135,11 +142,13 @@ public class LabFourGame extends Game{
 			}
 
 			//scale
-			if (pressedKeys.contains(KeyEvent.VK_A)) {
+			if (pressedKeys.contains(KeyEvent.VK_A)) 
+			{
 				mario.setScaleX(mario.getScaleX() + .05);
 				mario.setScaleY(mario.getScaleY() + .05);
 			}
-			if (pressedKeys.contains(KeyEvent.VK_S)) {
+			if (pressedKeys.contains(KeyEvent.VK_S)) 
+			{
 				mario.setScaleX(mario.getScaleX() - .05);
 				mario.setScaleY(mario.getScaleY() - .05);
 				if ((mario.getScaleX() < 0) || (mario.getScaleY() < 0)) {

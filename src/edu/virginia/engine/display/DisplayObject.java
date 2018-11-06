@@ -6,6 +6,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.awt.geom.Area;
+import java.awt.Rectangle;
+import java.awt.Shape;
+import java.awt.geom.AffineTransform;
 
 
 import javax.imageio.ImageIO;
@@ -63,10 +66,14 @@ public class DisplayObject {
 
 	public void setScaleX(double scaleX) {
 		this.scaleX = scaleX;
+		if (displayImage != null)
+			this.setHitBox(new Rectangle(this.position.x, this.position.y, (int)(displayImage.getWidth() * this.scaleX), (int)(displayImage.getHeight() * this.scaleY)));
 	}
 
 	public void setScaleY(double scaleY) {
 		this.scaleY = scaleY;
+		if (displayImage != null)
+			this.setHitBox(new Rectangle(this.position.x, this.position.y, (int)(displayImage.getWidth() * this.scaleX), (int)(displayImage.getHeight() * this.scaleY)));
 	}
 
 
@@ -293,6 +300,11 @@ public class DisplayObject {
 	
 	public boolean collidesWith(DisplayObject other)
 	{
+		//THIS NEEDS TO WORK AND IDK WHY IT DOESNT - also add scaling
+//		AffineTransform tx = new AffineTransform();
+//	    tx.rotate(this.getRotation());
+//	    Shape newShape = tx.createTransformedShape(this.getHitBox());
+	    
 		Area areaA = new Area(this.getHitBox());
 		areaA.intersect(new Area(other.getHitBox()));
 		return !areaA.isEmpty();
