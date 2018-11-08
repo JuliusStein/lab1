@@ -184,6 +184,11 @@ public class LabFourGame extends Game{
 
 		}
 
+		if (pressedKeys.contains(KeyEvent.VK_V))
+		{
+			mario.setVisible(!mario.isVisible());
+		}
+
 
 		if((mario.getGameClock().getElapsedTime()>mario.getAnimationSpeed())&&(mario.isPlaying())){
 			if (mario.getCurrentFrame() < mario.getEndFrame())
@@ -232,7 +237,7 @@ public class LabFourGame extends Game{
 		/* Same, just check for null in case a frame gets thrown in before Mario is initialized */
 		if(goomba != null) goomba.draw(g);
 		if(flag != null) flag.draw(g);
-		if(mario != null) mario.draw(g);
+		if((mario != null)&&(mario.isVisible())) mario.draw(g);
 		g.drawString(Integer.toString(points), 10, 20);
 
 		//WIN CONDITION
@@ -275,6 +280,7 @@ public class LabFourGame extends Game{
 
 		mario.setPosition(new Point(mario.getPosition().x + 5, mario.getPosition().y + 50));
 		mario.setPivotPoint(new Point (0,0));
+		mario.setVisible(true);
 		goomba.setPosition(new Point(500, 150));
 		flag.setPosition(new Point(900, 10));
 
