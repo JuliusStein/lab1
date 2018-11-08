@@ -29,6 +29,7 @@ public class LabFourGame extends Game{
 	private boolean playingWin = false;
 	private int playingDeathTimer = 0;
 	private int playingWinTimer = 0;
+	private boolean hitBox = false;
 
 	/**
 	 * Constructor. See constructor in Game.java for details on the parameters given
@@ -124,6 +125,11 @@ public class LabFourGame extends Game{
 		if (pressedKeys.contains(KeyEvent.VK_W))
 		{
 				mario.setRotation(mario.getRotation() - 5);
+		}
+
+		if (pressedKeys.contains(KeyEvent.VK_H))
+		{
+			this.hitBox = (!this.hitBox);
 		}
 
 		// pivot point
@@ -254,7 +260,12 @@ public class LabFourGame extends Game{
 		//////////////
 
 		Graphics2D g2d = (Graphics2D) g;
-		g2d.draw(mario.getHitBox());
+		if(this.hitBox){
+			g2d.draw(mario.getHitBox());
+			g2d.draw(flag.getHitBox());
+			g2d.draw(goomba.getHitBox());
+		}
+
 		/*g.drawShape((int)(((Rectangle)mario.getHitBox()).getX()),(int)((Rectangle)mario.getHitBox()).getY(),
 				(int)((Rectangle)mario.getHitBox()).getWidth(),(int)((Rectangle)mario.getHitBox()).getHeight());*/
 	}
