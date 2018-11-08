@@ -76,9 +76,6 @@ public class LabFourGame extends Game{
 			}
 		}
 
-		if(!playingDeath){
-
-		}
 
 		/* Make sure mario is not null. Sometimes Swing can auto cause an extra frame to go before everything is initialized */
 		if (mario != null) mario.update(pressedKeys);
@@ -113,9 +110,6 @@ public class LabFourGame extends Game{
 			mario.setPivotPoint(new Point(mario.getPivotPoint().x - 6, mario.getPivotPoint().y));
 		}
 
-//			if (pressedKeys.contains(KeyEvent.VK_UP)) {
-//				mario.setPosition(new Point(mario.getPosition().x, mario.getPosition().y - 5));
-//			}
 
 		if (pressedKeys.contains(KeyEvent.VK_DOWN)) {
 			mario.setPosition(new Point(mario.getPosition().x, mario.getPosition().y + 5));
@@ -144,15 +138,23 @@ public class LabFourGame extends Game{
 
 		//Animation Speed
 		if (pressedKeys.contains(KeyEvent.VK_X)) {
-			mario.setAnimationSpeed(mario.getAnimationSpeed() + 5);
-			if (mario.getAnimationSpeed() > 350) {
-				mario.setAnimationSpeed(350);
+//			mario.setAnimationSpeed(mario.getAnimationSpeed() + 5);
+//			if (mario.getAnimationSpeed() > 350) {
+//				mario.setAnimationSpeed(350);
+//			}
+			mario.setAlpha(mario.getAlpha() - .025f);
+			if(mario.getAlpha()<0.0f){
+				mario.setAlpha(0.0f);
 			}
 		}
 		if (pressedKeys.contains(KeyEvent.VK_Z)) {
-			mario.setAnimationSpeed(mario.getAnimationSpeed() - 5);
-			if (mario.getAnimationSpeed() < 25) {
-				mario.setAnimationSpeed(25);
+//			mario.setAnimationSpeed(mario.getAnimationSpeed() - 5);
+//			if (mario.getAnimationSpeed() < 25) {
+//				mario.setAnimationSpeed(25);
+//			}
+			mario.setAlpha(mario.getAlpha() + .025f);
+			if(mario.getAlpha()>1.0f){
+				mario.setAlpha(1.0f);
 			}
 		}
 		if (pressedKeys.contains(KeyEvent.VK_C)) {
