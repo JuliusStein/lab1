@@ -66,14 +66,12 @@ public class DisplayObject {
 
 	public void setScaleX(double scaleX) {
 		this.scaleX = scaleX;
-		if (displayImage != null)
-			this.setHitBox(new Rectangle(this.position.x, this.position.y, (int)(displayImage.getWidth() * this.scaleX), (int)(displayImage.getHeight() * this.scaleY)));
+		updateHitbox();
 	}
 
 	public void setScaleY(double scaleY) {
 		this.scaleY = scaleY;
-		if (displayImage != null)
-			this.setHitBox(new Rectangle(this.position.x, this.position.y, (int)(displayImage.getWidth() * this.scaleX), (int)(displayImage.getHeight() * this.scaleY)));
+		updateHitbox();
 	}
 
 
@@ -175,6 +173,16 @@ public class DisplayObject {
 		displayImage = image;
 	}
 
+	public void updateHitbox(){
+		if (this.displayImage != null){
+			this.hitBox = new Rectangle(position.x, position.y, (int)(displayImage.getWidth()*getScaleX()), (int)(displayImage.getHeight()*getScaleY()));
+			AffineTransform tx = new AffineTransform();
+			tx.rotate(Math.toRadians(this.getRotation()), this.position.x+this.pivotPoint.x, this.position.y+this.pivotPoint.y);
+			Shape newShape = tx.createTransformedShape(this.hitBox);
+			this.hitBox = newShape;
+		}
+	}
+
 
 	/**
 	 * Invoked on every frame before drawing. Used to update this display
@@ -225,7 +233,6 @@ public class DisplayObject {
 		float curAlpha;
 		this.oldAlpha = curAlpha = ((AlphaComposite)g2d.getComposite()).getAlpha();
 		g2d.setComposite(AlphaComposite.getInstance(3, curAlpha * this.alpha));
-		//g2d.rotate(Math.toRadians(this.getRotation()), this.pivotPoint.x, this.pivotPoint.y);
 	}
 
 	/**
@@ -247,6 +254,7 @@ public class DisplayObject {
 
 	public void setRotation(int rotation) {
 		this.rotation = rotation;
+		updateHitbox();
 	}
 
 	public Point getPivotPoint() {
@@ -263,8 +271,7 @@ public class DisplayObject {
 
 	public void setPosition(Point position) {
 		this.position = position;
-		if (displayImage != null)
-			this.hitBox = new Rectangle(position.x, position.y, displayImage.getWidth(), displayImage.getHeight());
+		updateHitbox();
 	}
 
 
@@ -300,10 +307,6 @@ public class DisplayObject {
 	
 	public boolean collidesWith(DisplayObject other)
 	{
-		//THIS NEEDS TO WORK AND IDK WHY IT DOESNT - also add scaling
-//		AffineTransform tx = new AffineTransform();
-//	    tx.rotate(this.getRotation());
-//	    Shape newShape = tx.createTransformedShape(this.getHitBox());
 	    
 		Area areaA = new Area(this.getHitBox());
 		areaA.intersect(new Area(other.getHitBox()));
