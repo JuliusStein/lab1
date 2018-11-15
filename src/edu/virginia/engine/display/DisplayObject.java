@@ -31,6 +31,7 @@ public class DisplayObject {
 	private double scaleX;
 	private double scaleY;
 	private Shape hitBox;
+	private boolean hasPhysics;
 
 	public boolean isVisible() {
 		return visible;
@@ -311,6 +312,14 @@ public class DisplayObject {
 		Area areaA = new Area(this.getHitBox());
 		areaA.intersect(new Area(other.getHitBox()));
 		return !areaA.isEmpty();
+	}
+
+	public boolean hasPhysics() {
+		return hasPhysics;
+	}
+
+	public void setHasPhysics(boolean hasPhysics) {
+		this.hasPhysics = hasPhysics;
 	}
 
 }
