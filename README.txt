@@ -8,4 +8,8 @@ IJKL: Treated as keyboard arrows. Moves Mario’s pivot point around.
 
 Instructions: Jump over the goomba and touch the flag to win.
 
+Physics:
+Gravity for jumps
+When mario collides with the side of the goomba, he stops moving, and when he collides with the top, he bounces
+
 My partner for this lab was Alex Friedman

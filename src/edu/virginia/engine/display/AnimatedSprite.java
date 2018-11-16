@@ -21,11 +21,14 @@ public class AnimatedSprite extends Sprite
     private int endFrame;
     private int stopFrame;
     private boolean isJumping;
+    private boolean collidesTop;
+    private boolean collision;
 	private static final int DEFAULT_ANIMATION_SPEED = 1;
     private int animationSpeed;
     private GameClock gameClock;
     private int facing; //1=right, -1=left
     private int jumpTimer = 0;
+    private int bounceTimer = 0;
 
     public AnimatedSprite(String ID, String fileName, Point position)
     {
@@ -80,6 +83,22 @@ public class AnimatedSprite extends Sprite
             this.gameClock = new GameClock();
     }
 
+    public boolean isCollidesTop() {
+        return collidesTop;
+    }
+
+    public void setCollidesTop(boolean collidesTop) {
+        this.collidesTop = collidesTop;
+    }
+
+    public boolean isCollision() {
+        return collision;
+    }
+
+    public void setCollision(boolean collision) {
+        this.collision = collision;
+    }
+
     public Animation getAnimation(String id)
     {
         for (int i = 0; i < this.animations.size(); i++)
@@ -105,6 +124,14 @@ public class AnimatedSprite extends Sprite
     {
         this.setStartFrame(start);
         this.setEndFrame(end);
+    }
+
+    public int getBounceTimer() {
+        return bounceTimer;
+    }
+
+    public void setBounceTimer(int bounceTimer) {
+        this.bounceTimer = bounceTimer;
     }
 
     public void stopAnimation(int frame)
