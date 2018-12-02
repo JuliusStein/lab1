@@ -197,15 +197,13 @@ public class Game extends DisplayObject implements ActionListener, KeyListener, 
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		System.out.println("hello1");
-		if(!pressedMouse.contains(1))
-			pressedMouse.add(1);
+//		if(!pressedMouse.contains(1))
+//			pressedMouse.add(1);
 	}
 
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		System.out.println("hello2");
 		if(!pressedMouse.contains(1))
 			pressedMouse.add(1);
 	}
@@ -213,9 +211,8 @@ public class Game extends DisplayObject implements ActionListener, KeyListener, 
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		System.out.println("hello3");
-		if(!pressedMouse.contains(1))
-			pressedMouse.remove(1);
+		if(pressedMouse.contains((Integer)1))
+			pressedMouse.remove((Integer)1);
 	}
 
 

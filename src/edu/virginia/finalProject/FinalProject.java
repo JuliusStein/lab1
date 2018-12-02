@@ -21,6 +21,7 @@ public class FinalProject extends Game{
     static SoundManager sound = new SoundManager();
     @SuppressWarnings("unused")
     private boolean hitBox = false;
+    private boolean pickedUp = false;
 
     /**
      * Constructor. See constructor in Game.java for details on the parameters given
@@ -37,13 +38,19 @@ public class FinalProject extends Game{
     public void update(ArrayList<Integer> pressedKeys, ArrayList<Integer> pressedMouse){
         super.update(pressedKeys, pressedMouse);
 
-        Point p = MouseInfo.getPointerInfo().getLocation();
-        //System.out.println("Mouse position: x = " + p.x + " y = " + p.y);
+        //Point p = MouseInfo.getPointerInfo().getLocation();
 
-        if (pressedMouse.contains(1))
+        if (pressedMouse.contains((Integer)1) && pickedUp == false)
         {
-            //System.out.println("mouse pressed yeet");
-            // this is where mouse down feature will go
+            System.out.println("mouse pressed yeet");
+            // pick up the piece
+            // if (over the piece that we can pick up)
+                pickedUp = true;
+        }
+        else if (pickedUp == true)
+        {
+        		// drop the piece this time
+        		pickedUp = false;
         }
 
         //mario.setPlaying(false);
@@ -96,11 +103,6 @@ public class FinalProject extends Game{
     public static void main(String[] args) throws IOException {
         FinalProject game = new FinalProject();
 
-		/*TODO:
-			- change collides with or box for rotation
-			- point structure?
-			- win score/screen
-			- change hitbox based on scale */
 
 //		sound.loadSoundEffect("jump", "resources/jump.wav");
 //		sound.loadSoundEffect("death", "resources/death.wav");
