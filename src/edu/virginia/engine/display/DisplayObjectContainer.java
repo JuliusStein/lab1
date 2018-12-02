@@ -1,12 +1,12 @@
 package edu.virginia.engine.display;
 
 import java.awt.*;
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class DisplayObjectContainer extends DisplayObject{
 
     private ArrayList<DisplayObject> children;
+    @SuppressWarnings("unused")
     private String id;
 
 
@@ -90,12 +90,12 @@ public class DisplayObjectContainer extends DisplayObject{
     }
 
     @Override
-    public void update(ArrayList<Integer> pressedKeys){
-        super.update(pressedKeys);
+    public void update(ArrayList<Integer> pressedKeys, ArrayList<Integer> pressedMouse){
+        super.update(pressedKeys, pressedMouse);
 
-            for(int i=0; i<this.children.size(); i++){
-                getChildAtIndex(i).update(pressedKeys);
-            }
+        for(int i=0; i<this.children.size(); i++){
+            getChildAtIndex(i).update(pressedKeys, pressedMouse);
+        }
 
     }
 }

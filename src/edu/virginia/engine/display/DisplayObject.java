@@ -190,7 +190,7 @@ public class DisplayObject {
 	 * objects state before the draw occurs. Should be overridden if necessary
 	 * to update objects appropriately.
 	 * */
-	protected void update(ArrayList<Integer> pressedKeys) {
+	protected void update(ArrayList<Integer> pressedKeys, ArrayList<Integer> pressedMouse) {
 
 	}
 
@@ -283,14 +283,14 @@ public class DisplayObject {
 	public void setParent(DisplayObject parent) {
 		this.parent = parent;
 	}
-	
+
 	public Point localToGlobal(Point p)
 	{
 		Point containerLoc = new Point(this.getPosition().x + this.getParent().getPosition().x,
 				this.getPosition().y + this.getParent().getPosition().y);
 		return containerLoc;
 	}
-	
+
 	public Point globalToLocal(Point p)
 	{
 		Point containerLoc = new Point(this.getPosition().x - this.getParent().getPosition().x,
@@ -305,10 +305,10 @@ public class DisplayObject {
 	public void setHitBox(Shape hitBox) {
 		this.hitBox = hitBox;
 	}
-	
+
 	public boolean collidesWith(DisplayObject other)
 	{
-	    
+
 		Area areaA = new Area(this.getHitBox());
 		areaA.intersect(new Area(other.getHitBox()));
 		return !areaA.isEmpty();

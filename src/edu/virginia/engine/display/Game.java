@@ -7,6 +7,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
@@ -17,9 +19,9 @@ import javax.swing.Timer;
 
 /**
  * Highest level class for creating a game in Java.
- * 
+ *
  * */
-public class Game extends DisplayObject implements ActionListener, KeyListener {
+public class Game extends DisplayObject implements ActionListener, KeyListener, MouseListener {
 
 	/* Frames per second this game runs at */
 	private int FRAMES_PER_SEC = 60;
@@ -29,22 +31,22 @@ public class Game extends DisplayObject implements ActionListener, KeyListener {
 
 	/* Timer that this game runs on */
 	private Timer gameTimer;
-	
+
 	/* The JPanel for this game */
 	private GameScenePanel scenePanel;
 
 	public Game(String gameId, int width, int height) {
 		super(gameId);
-		
+
 		setUpMainFrame(gameId, width, height);
-		
+
 		setScenePanel(new GameScenePanel(this));
-		
+
 		/* Use an absolute layout */
 		scenePanel.setLayout(null);
 	}
-	
-	
+
+
 	public void setFramesPerSecond(int fps){
 		if(fps > 0) this.FRAMES_PER_SEC = fps;
 	}
@@ -62,6 +64,7 @@ public class Game extends DisplayObject implements ActionListener, KeyListener {
 			}
 		});
 		getMainFrame().addKeyListener(this);
+		getMainFrame().addMouseListener(this);
 	}
 
 	/**
@@ -89,13 +92,13 @@ public class Game extends DisplayObject implements ActionListener, KeyListener {
 			gameTimer.stop();
 		}
 	}
-	
+
 	public void exitGame(){
 		stop();
 		this.mainFrame.setVisible(false);
 		this.mainFrame.dispose();
 	}
-	
+
 	/**
 	 * Close the window
 	 * */
@@ -116,7 +119,7 @@ public class Game extends DisplayObject implements ActionListener, KeyListener {
 	public void actionPerformed(ActionEvent e) {
 		repaintGame();
 	}
-	
+
 	/**
 	 * Forces a repaint
 	 * */
@@ -132,7 +135,7 @@ public class Game extends DisplayObject implements ActionListener, KeyListener {
 
 		try {
 			/* Update all objects on the stage */
-			this.update(pressedKeys);
+			this.update(pressedKeys, pressedMouse);
 
 			/* Draw everything on the screen */
 			this.draw(g);
@@ -143,20 +146,20 @@ public class Game extends DisplayObject implements ActionListener, KeyListener {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Override
 	public void draw(Graphics g){
 		/* Start with no transparency */
 		((Graphics2D)g).setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,
 				1.0f));
-		
+
 		super.draw(g);
 	}
 
 	public JFrame getMainFrame() {
 		return this.mainFrame;
 	}
-	
+
 	public void setScenePanel(GameScenePanel scenePanel) {
 		this.scenePanel = scenePanel;
 		this.getMainFrame().add(this.scenePanel);
@@ -169,6 +172,7 @@ public class Game extends DisplayObject implements ActionListener, KeyListener {
 	}
 
 	ArrayList<Integer> pressedKeys = new ArrayList<Integer>();
+	ArrayList<Integer> pressedMouse = new ArrayList<Integer>();
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if(!pressedKeys.contains((Integer)e.getKeyCode()))
@@ -180,13 +184,51 @@ public class Game extends DisplayObject implements ActionListener, KeyListener {
 	public void keyReleased(KeyEvent e) {
 		if(pressedKeys.contains((Integer)e.getKeyCode()))
 			pressedKeys.remove((Integer)e.getKeyCode());
-		
+
 	}
 
 
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
+
+	}
+
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		System.out.println("hello1");
+		if(!pressedMouse.contains(1))
+			pressedMouse.add(1);
+	}
+
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		System.out.println("hello2");
+		if(!pressedMouse.contains(1))
+			pressedMouse.add(1);
+	}
+
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		System.out.println("hello3");
+		if(!pressedMouse.contains(1))
+			pressedMouse.remove(1);
+	}
+
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+
 	}
 }
