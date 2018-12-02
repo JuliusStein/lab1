@@ -53,12 +53,6 @@ public class FinalProject extends Game{
         		pickedUp = false;
         }
 
-        //mario.setPlaying(false);
-
-        /* Make sure mario is not null. Sometimes Swing can auto cause an extra frame to go before everything is initialized */
-        //if (mario != null) mario.update(pressedKeys);
-
-
         //Move
         //if (pressedKeys.contains(KeyEvent.VK_UP))
 
@@ -72,9 +66,6 @@ public class FinalProject extends Game{
 //			mario.setPivotPoint(new Point(mario.getPivotPoint().x - 5, mario.getPivotPoint().y));
 //		if (pressedKeys.contains(KeyEvent.VK_L))
 //			mario.setPivotPoint(new Point(mario.getPivotPoint().x + 5, mario.getPivotPoint().y));
-
-        //System.out.println("Position: "+mario.getPosition()+" |##| Pivot: "+mario.getPivotPoint());
-
 
     }
 
