@@ -1,9 +1,6 @@
 package edu.virginia.finalProject;
 
-import edu.virginia.engine.display.AnimatedSprite;
-import edu.virginia.engine.display.Game;
-import edu.virginia.engine.display.SoundManager;
-import edu.virginia.engine.display.Sprite;
+import edu.virginia.engine.display.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
@@ -15,8 +12,9 @@ import java.util.ArrayList;
  * */
 public class FinalProject extends Game{
 
-//	static /* Create a sprite object for our game. We'll use mario */
-//	AnimatedSprite mario = new AnimatedSprite("Mario", "Mario.png", new Point(0,0));
+	static Board board = new Board("board", "board.png");
+	static DisplayObject background = new DisplayObject("background", "background.png");
+    static DisplayObject partBank = new DisplayObject("partBank", "partBank.png");
 
     static SoundManager sound = new SoundManager();
     @SuppressWarnings("unused")
@@ -78,6 +76,9 @@ public class FinalProject extends Game{
     @Override
     public void draw(Graphics g){
         super.draw(g);
+        if(board != null) board.draw(g);
+        if(partBank != null) partBank.draw(g);
+        if(background != null) background.draw(g);
 
         /* Same, just check for null in case a frame gets thrown in before Mario is initialized */
         //if((mario != null)&&(mario.isVisible())) mario.draw(g);
@@ -110,6 +111,9 @@ public class FinalProject extends Game{
         //sound.playMusic("theme");
 
         //mario.populate();
+        background.setPosition(new Point(0,0));
+        partBank.setPosition(new Point(100,100));
+        board.setPosition(new Point(500,100));
 
         game.start();
     }

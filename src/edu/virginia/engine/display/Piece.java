@@ -14,6 +14,11 @@ public class Piece extends DisplayObject {
         // TODO Auto-generated constructor stub
     }
 
+    public Piece(String id, String filename) {
+        super(id, filename);
+        // TODO Auto-generated constructor stub
+    }
+
     public Piece(int start, int end)
     {
         super("");
