@@ -2,8 +2,10 @@ package edu.virginia.engine.display;
 
 public class Piece extends DisplayObject {
 
+    //start and end need to be set according to (-1 = left, 1 = right, -5 = up, 5 = down)
     private int start;
     private int end;
+    private int index;
     private boolean hasVoltage;
     private boolean hasResistance;
     private int voltage;
@@ -94,6 +96,14 @@ public class Piece extends DisplayObject {
 
     public void setResistance(int resistance) {
         this.resistance = resistance;
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
     }
 
 }

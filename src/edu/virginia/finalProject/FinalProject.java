@@ -24,7 +24,7 @@ public class FinalProject extends Game{
      * Constructor. See constructor in Game.java for details on the parameters given
      * */
     public FinalProject() {
-        super("Final Project Game", 1400, 800);
+        super("Final Project Game", 1385, 775);
     }
 
     /**
@@ -76,9 +76,35 @@ public class FinalProject extends Game{
     @Override
     public void draw(Graphics g){
         super.draw(g);
+        if(background != null) background.draw(g);
         if(board != null) board.draw(g);
         if(partBank != null) partBank.draw(g);
-        if(background != null) background.draw(g);
+
+        g.setColor(Color.GREEN);
+        g.fillRect(25, 290, 150, 50);
+
+        g.setColor(Color.YELLOW);
+        g.fillRect(25, 365, 150, 50);
+
+        g.setColor(Color.RED);
+        g.fillRect(25, 440, 150, 50);
+
+        g.setColor(Color.BLACK);
+        g.drawString("CHECK",75, 320);
+        g.drawString("HINT",80, 395);
+        g.drawString("QUIT",80, 470);
+
+        g.fillRect(790, 25, 5,700);
+        g.fillRect(930, 25, 5,700);
+        g.fillRect(1070, 25, 5,700);
+        g.fillRect(1210, 25, 5,700);
+
+        g.fillRect(650, 165, 700, 5);
+        g.fillRect(650, 305, 700, 5);
+        g.fillRect(650, 445, 700, 5);
+        g.fillRect(650, 585, 700, 5);
+
+
 
         /* Same, just check for null in case a frame gets thrown in before Mario is initialized */
         //if((mario != null)&&(mario.isVisible())) mario.draw(g);
@@ -112,8 +138,8 @@ public class FinalProject extends Game{
 
         //mario.populate();
         background.setPosition(new Point(0,0));
-        partBank.setPosition(new Point(100,100));
-        board.setPosition(new Point(500,100));
+        partBank.setPosition(new Point(225,25));
+        board.setPosition(new Point(650,25));
 
         game.start();
     }
