@@ -5,6 +5,14 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
+
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JRadioButton;
 
 /**
  * Example game that utilizes our engine. We can create a simple prototype game with just a couple lines of code
@@ -149,14 +157,104 @@ public class FinalProject extends Game{
         partBank.setPosition(new Point(225,25));
         board.setPosition(new Point(650,25));
 
-        // if scanner is one of the three numers
-        // if 1
-            // create x pieces, give them starting points, add them to bank array, set current position equal to starting one
-        // if 2
-            // same
-        // if 3
-            // same
-
+        Scanner in = new Scanner(System.in);
+        String input = "";
+//        System.out.println("Please input the level you would like to play (\"1\", \"2\", or \"3\")");
+//        
+//        input = in.nextLine();
+//        		
+//        if (input.equals("1"))
+//        {
+//        	// start level 1
+//        	System.out.println("level 1");
+//        }
+//        else if (input.equals("2"))
+//        {
+//        	// start level 2
+//        	System.out.println("level 2");
+//        }
+//        else if (input.equals("3"))
+//        {
+//        	// start level 3
+//        	System.out.println("level 3");
+//        }
+//        else
+//        {
+//        	System.out.println("That does not correspond to one of the levels! Quitting");
+//        }
+                
+        final JFrame parent = new JFrame();
+        
+        JLabel jlabel = new JLabel("Choose a level!");
+        jlabel.setFont(new Font("Verdana",1,20));
+        
+        parent.add(jlabel);
+        
+        JRadioButton option1 = new JRadioButton("Level 1");
+        JRadioButton option2 = new JRadioButton("Level 2");
+        JRadioButton option3 = new JRadioButton("Level 3");
+ 
+        ButtonGroup group = new ButtonGroup();
+        group.add(option1);
+        group.add(option2);
+        group.add(option3);
+ 
+        parent.setLayout(new FlowLayout());
+ 
+        parent.add(option1);
+        parent.add(option2);
+        parent.add(option3);
+ 
+        parent.pack();
+        parent.setVisible(true);
+        
+        try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+        
+        boolean level1 = option1.isSelected();
+        boolean level2 = option2.isSelected();
+        boolean level3 = option3.isSelected();
+        
+        if (level1)
+        {
+        	populateLevel(1);
+        	parent.setVisible(false);
+        	parent.dispose();
+        }
+        else if (level2)
+        {
+        	populateLevel(2);
+        	parent.setVisible(false);
+        	parent.dispose();
+        }
+        else if(level3)
+        {
+        	populateLevel(3);
+        	parent.setVisible(false);
+        	parent.dispose();
+        }
+        else
+        	System.out.println("No level selected");
+        
         game.start();
     }
+
+	private static void populateLevel(int level) 
+	{
+		if (level == 1)
+		{
+			
+		}
+		else if (level == 2)
+		{
+			
+		}
+		else if (level == 3)
+		{
+			
+		}
+	}
 }
