@@ -149,6 +149,14 @@ public class FinalProject extends Game{
         partBank.setPosition(new Point(225,25));
         board.setPosition(new Point(650,25));
 
+        // if scanner is one of the three numers
+        // if 1
+            // create x pieces, give them starting points, add them to bank array, set current position equal to starting one
+        // if 2
+            // same
+        // if 3
+            // same
+
         game.start();
     }
 }
