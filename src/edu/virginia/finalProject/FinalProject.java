@@ -36,14 +36,29 @@ public class FinalProject extends Game{
     public void update(ArrayList<Integer> pressedKeys, ArrayList<Integer> pressedMouse){
         super.update(pressedKeys, pressedMouse);
 
-        //Point p = MouseInfo.getPointerInfo().getLocation();
+        Point p = MouseInfo.getPointerInfo().getLocation();
+        //System.out.println(p.getX() + " " + p.getY());
 
-        if (pressedMouse.contains((Integer)1) && pickedUp == false)
+        if (pressedMouse.contains((Integer)1))
         {
-            System.out.println("mouse pressed yeet");
+        	if (pickedUp == false)
+        	{
+	        	if (p.getX() >= 225 && p.getX() <= 598 && p.getY() >= 75 && p.getY() <= 775)
+	        		System.out.println("inside the bank");
+	        	if (p.getX() >= 650 && p.getX() <= 1350 && p.getY() >= 75 && p.getY() <= 775)
+	        		System.out.println("inside the board");
+	        	
+	        	pickedUp = true;
+        	}
+        	
+        	if (p.getX() >= 25 && p.getX() <= 175 && p.getY() >= 340 && p.getY() <= 390)
+        		System.out.println("inside the green");
+        	if (p.getX() >= 25 && p.getX() <= 175 && p.getY() >= 415 && p.getY() <= 465)
+        		System.out.println("inside the yellow");
+        	if (p.getX() >= 25 && p.getX() <= 175 && p.getY() >= 490 && p.getY() <= 540)
+        		System.out.println("inside the red");
             // pick up the piece
             // if (over the piece that we can pick up)
-                pickedUp = true;
         }
         else if (pickedUp == true)
         {
