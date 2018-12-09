@@ -101,6 +101,17 @@ public class FinalProject extends Game{
 	        		// determine what board square you are in with coordinates - then save those temporarily
 	        		// determine if a piece is there, if so, pick it up
 	        		// empty the array section on the board if so
+	        		int x = (int) ((p.getX() - 650) / 141);
+	        		int y = (int) ((p.getY() - 75) / 141);		
+	        		
+	        		if (board.getTaken()[x][y])
+	        		{
+	        			Piece pieceI = board.getPieceAtIndex(5 * y + x);
+	        			board.removePieceAtIndex(5 * y + x);
+	        			inHand = pieceI;
+	        			offsetx = 0; // finish this
+	        			offsety = 0; // finish this
+	        		}
 	        	}
 	        	
 	        	pickedUp = true;
