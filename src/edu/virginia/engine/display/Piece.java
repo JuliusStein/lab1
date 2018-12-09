@@ -1,5 +1,7 @@
 package edu.virginia.engine.display;
 
+import java.awt.Point;
+
 public class Piece extends DisplayObject {
 
     //start and end need to be set according to (-1 = left, 1 = right, -5 = up, 5 = down)
@@ -10,6 +12,7 @@ public class Piece extends DisplayObject {
     private boolean hasResistance;
     private int voltage;
     private int resistance;
+    private Point startingPosition;
 
     public Piece(String id) {
         super(id);
@@ -112,5 +115,12 @@ public class Piece extends DisplayObject {
         this.index = index;
     }
 
+	public Point getStartingPosition() {
+		return startingPosition;
+	}
+
+	public void setStartingPosition(Point startingPosition) {
+		this.startingPosition = startingPosition;
+	}
 }
 

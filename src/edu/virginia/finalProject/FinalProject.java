@@ -2,16 +2,11 @@ package edu.virginia.finalProject;
 
 import edu.virginia.engine.display.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
-
 import javax.swing.ButtonGroup;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 
 /**
@@ -23,8 +18,9 @@ public class FinalProject extends Game{
 	static Board board = new Board("board", "board.png");
 	static DisplayObject background = new DisplayObject("background", "background.png");
     static DisplayObject partBank = new DisplayObject("partBank", "partBank.png");
-    static Piece p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15;
+    static Piece p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, bomb, battery;
     static ArrayList<Piece> bank = new ArrayList<Piece>();
+    static Piece inHand = null;
 
     static SoundManager sound = new SoundManager();
     @SuppressWarnings("unused")
@@ -64,49 +60,80 @@ public class FinalProject extends Game{
         super.update(pressedKeys, pressedMouse);
 
         Point p = MouseInfo.getPointerInfo().getLocation();
-        //System.out.println(p.getX() + " " + p.getY());
+        
+        if (pickedUp)
+        {
+        	inHand.setPosition(p);
+        	p.setLocation(p.x, p.y - 50); // go back to the pickup point in bank and put a mouse offset and keep that, also create those vars up top
+        }
 
         if (pressedMouse.contains((Integer)1))
         {
         	if (pickedUp == false)
         	{
-	        	if (p.getX() >= 225 && p.getX() <= 598 && p.getY() >= 75 && p.getY() <= 775)
+	        	if (p.getX() >= 185 && p.getX() <= 623 && p.getY() >= 75 && p.getY() <= 775)
+	        	{
 	        		System.out.println("inside the bank");
+	        		
+	        		// TODO: this
+	        		// determine if on top of a piece by iterating through pieces in bank arrayList
+	        		// if on top of one, pick that piece up, then empty it inside the pieces in bank array
+	        		for (int i = 0; i < bank.size(); i++)
+	        		{
+	        			Piece pieceI = bank.get(i);
+	        			if (pieceI != null)
+	        			{
+	        				if (p.getX() >= pieceI.getPosition().x && 
+	        					p.getX() <= (pieceI.getPosition().x + 136)  && 
+	        					p.getY() >= (pieceI.getPosition().y + 50) && 
+	        					p.getY() <= (pieceI.getPosition().y + 136 + 50))
+	        					inHand = pieceI;
+	        			}
+	        		}
+	        	}
 	        	if (p.getX() >= 650 && p.getX() <= 1350 && p.getY() >= 75 && p.getY() <= 775)
+	        	{
 	        		System.out.println("inside the board");
+	        		// TODO: this
+	        		// determine what board square you are in with coordinates - then save those temporarily
+	        		// determine if a piece is there, if so, pick it up
+	        		// empty the array section on the board if so
+	        	}
 	        	
 	        	pickedUp = true;
         	}
         	
-        	if (p.getX() >= 25 && p.getX() <= 175 && p.getY() >= 340 && p.getY() <= 390)
+        	if (p.getX() >= 15 && p.getX() <= 165 && p.getY() >= 340 && p.getY() <= 390)
+        	{
         		System.out.println("inside the green");
-        	if (p.getX() >= 25 && p.getX() <= 175 && p.getY() >= 415 && p.getY() <= 465)
+        		// TODO: this
+        		
+        		// call the check correct method or whatever we want to call it
+        	}
+        	if (p.getX() >= 15 && p.getX() <= 165 && p.getY() >= 415 && p.getY() <= 465)
+        	{
         		System.out.println("inside the yellow");
-        	if (p.getX() >= 25 && p.getX() <= 175 && p.getY() >= 490 && p.getY() <= 540)
-        		System.out.println("inside the red");
-            // pick up the piece
-            // if (over the piece that we can pick up)
+        		// TODO: this
+        		
+        		// call the hint method? maybe if we decide to do it
+        	}
+        	if (p.getX() >= 15 && p.getX() <= 165 && p.getY() >= 490 && p.getY() <= 540)
+        	{	
+        		getMainFrame().setVisible(false);
+            	getMainFrame().dispose();      	
+            }
         }
         else if (pickedUp == true)
         {
-        		// drop the piece this time
-        		pickedUp = false;
+        	// TODO: this
+        	// drop the piece this time
+        	
+        	// determine what board square you are in with coordinates
+        	// determine if a piece is there, if not, place the piece in hold down
+        	// populate the array section on the board if so
+        	
+        	pickedUp = false;
         }
-
-        //Move
-        //if (pressedKeys.contains(KeyEvent.VK_UP))
-
-
-        // pivot point
-//		if (pressedKeys.contains(KeyEvent.VK_I))
-//			mario.setPivotPoint(new Point(mario.getPivotPoint().x, mario.getPivotPoint().y - 5));
-//		if (pressedKeys.contains(KeyEvent.VK_K))
-//			mario.setPivotPoint(new Point(mario.getPivotPoint().x, mario.getPivotPoint().y + 5));
-//		if (pressedKeys.contains(KeyEvent.VK_J))
-//			mario.setPivotPoint(new Point(mario.getPivotPoint().x - 5, mario.getPivotPoint().y));
-//		if (pressedKeys.contains(KeyEvent.VK_L))
-//			mario.setPivotPoint(new Point(mario.getPivotPoint().x + 5, mario.getPivotPoint().y));
-
     }
 
     /**
@@ -151,15 +178,6 @@ public class FinalProject extends Game{
         for(int j=0; j<board.getPieces().size(); j++){
             board.getPieceAtIndex(j).draw(g);
         }
-
-
-        /* Same, just check for null in case a frame gets thrown in before Mario is initialized */
-        //if((mario != null)&&(mario.isVisible())) mario.draw(g);
-        //g.drawString(Integer.toString(points), 10, 20);
-
-
-		/*g.drawShape((int)(((Rectangle)mario.getHitBox()).getX()),(int)((Rectangle)mario.getHitBox()).getY(),
-				(int)((Rectangle)mario.getHitBox()).getWidth(),(int)((Rectangle)mario.getHitBox()).getHeight());*/
     }
 
     /**
@@ -169,7 +187,6 @@ public class FinalProject extends Game{
      * */
     public static void main(String[] args) throws IOException {
         FinalProject game = new FinalProject();
-
 
 //		sound.loadSoundEffect("jump", "resources/jump.wav");
 //		sound.loadSoundEffect("death", "resources/death.wav");
@@ -182,32 +199,6 @@ public class FinalProject extends Game{
         background.setPosition(new Point(0,0));
         partBank.setPosition(new Point(185,25));
         board.setPosition(new Point(650,25));
-
-//        Scanner in = new Scanner(System.in);
-//        String input = "";
-//        System.out.println("Please input the level you would like to play (\"1\", \"2\", or \"3\")");
-//        
-//        input = in.nextLine();
-//        		
-//        if (input.equals("1"))
-//        {
-//        	// start level 1
-//        	System.out.println("level 1");
-//        }
-//        else if (input.equals("2"))
-//        {
-//        	// start level 2
-//        	System.out.println("level 2");
-//        }
-//        else if (input.equals("3"))
-//        {
-//        	// start level 3
-//        	System.out.println("level 3");
-//        }
-//        else
-//        {
-//        	System.out.println("That does not correspond to one of the levels! Quitting");
-//        }
                 
         final JFrame parent = new JFrame();
         
@@ -263,7 +254,14 @@ public class FinalProject extends Game{
         	parent.dispose();
         }
         else
+        {
         	System.out.println("No level selected");
+        	parent.setVisible(false);
+        	parent.dispose();
+        	game.getMainFrame().setVisible(false);
+        	game.getMainFrame().dispose();
+        	return;
+        }
         
         game.start();
     }
@@ -271,30 +269,51 @@ public class FinalProject extends Game{
 	private static void populateLevel(int level) 
 	{
 		if (level == 1)
-		{
+		{	
+			bomb = new Piece("bomb", "bomb.png", 5, -5, 0, 0);
+			bomb.setPosition(new Point(650, 448));
+			bomb.setStartingPosition(new Point(650, 448));
+			board.addPieceAtIndex(bomb, 15);
+			battery = new Piece("battery", "battery.png", 5, -5, 0, 0);
+			battery.setPosition(new Point(650, 307));
+			battery.setStartingPosition(new Point(650, 307));
+			board.addPieceAtIndex(battery, 10);
+			p15 = new Piece("topRightStuck", "TopRight.png", 1, -5, 0, 0);
+			p15.setPosition(new Point(650, 589));
+			p15.setStartingPosition(new Point(650, 589));
+			board.addPieceAtIndex(p15, 20);
+			
 		    p1 = new Piece("horizontalWire", "Horizontal.png", -1, 1, 0, 0);
 			p1.setPosition(new Point(185, 25));
+			p1.setStartingPosition(new Point(185, 25));
 			addPieceAtIndex(p1, 0);
 			p2 = new Piece("verticalWire", "Vertical.png", -5, 5, 0, 0);
             p2.setPosition(new Point(331, 25));
+            p2.setStartingPosition(new Point(331, 25));
             addPieceAtIndex(p2, 1);
             p3 = new Piece("topLeft", "TopLeft.png", -1, -5, 0, 0);
             p3.setPosition(new Point(477, 25));
+            p3.setStartingPosition(new Point(477, 25));
             addPieceAtIndex(p3, 2);
             p4 = new Piece("bottomLeft", "BottomLeft.png", -1, 5, 0, 0);
             p4.setPosition(new Point(185, 171));
+            p4.setStartingPosition(new Point(185, 171));
             addPieceAtIndex(p4, 3);
             p5 = new Piece("topRight", "TopRight.png", -5, 1, 0, 0);
             p5.setPosition(new Point(331, 171));
+            p5.setStartingPosition(new Point(331, 171));
             addPieceAtIndex(p5, 4);
             p6 = new Piece("bottomRight", "BottomRight.png", 5, 1, 0, 0);
             p6.setPosition(new Point(477, 171));
+            p6.setStartingPosition(new Point(477, 171));
             addPieceAtIndex(p6, 5);
             p7 = new Piece("horizontalResistor", "resistorHorizontal5.png", -5, 1, 0, 5);
             p7.setPosition(new Point(185, 317));
+            p7.setStartingPosition(new Point(185, 317));
             addPieceAtIndex(p7, 6);
             p8 = new Piece("verticalResistor", "resistorVertical10.png", 5, 1, 0, 10);
             p8.setPosition(new Point(331, 317));
+            p8.setStartingPosition(new Point(331, 317));
             addPieceAtIndex(p8, 7);
 		}
 		else if (level == 2)
