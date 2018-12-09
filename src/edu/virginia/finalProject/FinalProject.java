@@ -121,7 +121,7 @@ public class FinalProject extends Game{
         	if (p.getX() >= 15 && p.getX() <= 165 && p.getY() >= 340 && p.getY() <= 390)
         	{
         		// TODO: this
-        		if (false/*board.hasCorrectResistance()*/)
+        		if (board.hasCorrectResistance())
         		{
         			// print out you win whoop de doo
         			sound.playSoundEffect("right");
@@ -362,12 +362,12 @@ public class FinalProject extends Game{
             p6.setStartingPosition(new Point(477, 171));
             p6.setMovable(true);
             addPieceAtIndex(p6, 5);
-            p7 = new Piece("horizontalResistor", "resistorHorizontal5.png", -5, 1, 0, 5);
+            p7 = new Piece("horizontalResistor", "resistorHorizontal5.png", -1, 1, 0, 5);
             p7.setPosition(new Point(185, 317));
             p7.setStartingPosition(new Point(185, 317));
             p7.setMovable(true);
             addPieceAtIndex(p7, 6);
-            p8 = new Piece("verticalResistor", "resistorVertical10.png", 5, 1, 0, 10);
+            p8 = new Piece("verticalResistor", "resistorVertical10.png", -5, 5, 0, 10);
             p8.setPosition(new Point(331, 317));
             p8.setStartingPosition(new Point(331, 317));
             p8.setMovable(true);

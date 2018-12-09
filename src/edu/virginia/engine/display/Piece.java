@@ -48,11 +48,11 @@ public class Piece extends DisplayObject {
         super(id, filename);
         this.start = start;
         this.end = end;
-        if(voltage!=0)
+        if(volt!=0)
             this.hasVoltage = true;
         else
             this.hasVoltage = false;
-        if(resistance!=0)
+        if(res!=0)
             this.hasResistance = true;
         else
             this.hasResistance = false;
