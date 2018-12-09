@@ -23,6 +23,7 @@ public class FinalProject extends Game{
     static Piece inHand = null;
     static double offsetx = 0;
     static double offsety = 0;
+    static int currentLevel = 0;
 
     static SoundManager sound = new SoundManager();
     @SuppressWarnings("unused")
@@ -255,18 +256,21 @@ public class FinalProject extends Game{
         
         if (level1)
         {
+            currentLevel = 1;
         	populateLevel(1);
         	parent.setVisible(false);
         	parent.dispose();
         }
         else if (level2)
         {
+            currentLevel = 2;
         	populateLevel(2);
         	parent.setVisible(false);
         	parent.dispose();
         }
         else if(level3)
         {
+            currentLevel = 3;
         	populateLevel(3);
         	parent.setVisible(false);
         	parent.dispose();
@@ -282,6 +286,8 @@ public class FinalProject extends Game{
         }
         
         game.start();
+
+        //Restart on win case?
     }
 
 	private static void populateLevel(int level) 
@@ -303,7 +309,7 @@ public class FinalProject extends Game{
 
 			board.setBatteryIndex(10);
 			board.setBombIndex(15);
-			board.setFinalResistance(30);
+			board.setFinalResistance(15);
 			board.setBatteryVoltage(0);
 			
 		    p1 = new Piece("horizontalWire", "Horizontal.png", -1, 1, 0, 0);
