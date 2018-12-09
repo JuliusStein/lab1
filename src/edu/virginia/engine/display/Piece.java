@@ -13,6 +13,7 @@ public class Piece extends DisplayObject {
     private int voltage;
     private int resistance;
     private Point startingPosition;
+    private boolean movable;
 
     public Piece(String id) {
         super(id);
@@ -121,6 +122,14 @@ public class Piece extends DisplayObject {
 
 	public void setStartingPosition(Point startingPosition) {
 		this.startingPosition = startingPosition;
+	}
+
+	public boolean isMovable() {
+		return movable;
+	}
+
+	public void setMovable(boolean movable) {
+		this.movable = movable;
 	}
 }
 

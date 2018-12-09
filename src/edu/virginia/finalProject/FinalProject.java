@@ -97,21 +97,19 @@ public class FinalProject extends Game{
 	        	}
 	        	if (p.getX() >= 650 && p.getX() <= 1350 && p.getY() >= 75 && p.getY() <= 775)
 	        	{
-	        		System.out.println("inside the board");
-	        		// TODO: this
-	        		// determine what board square you are in with coordinates - then save those temporarily
-	        		// determine if a piece is there, if so, pick it up
-	        		// empty the array section on the board if so
 	        		int x = (int) ((p.getX() - 650) / 141);
 	        		int y = (int) ((p.getY() - 75) / 141);		
 	        		
 	        		if (board.getTaken()[x][y])
 	        		{
 	        			Piece pieceI = board.getPieceAtIndex(5 * y + x);
-	        			board.removePieceAtIndex(5 * y + x);
-	        			inHand = pieceI;
-	        			offsetx = 0; // finish this
-	        			offsety = 0; // finish this
+	        			if (pieceI.isMovable())
+	        			{
+		        			board.removePieceAtIndex(5 * y + x);
+		        			inHand = pieceI;
+		        			offsetx = p.getX() - pieceI.getPosition().x;
+		        			offsety = p.getY() - (pieceI.getPosition().y + 50);
+	        			}
 	        		}
 	        	}
 	        	
@@ -308,15 +306,18 @@ public class FinalProject extends Game{
 			bomb = new Piece("bomb", "bomb.png", 5, -5, 0, 0);
 			bomb.setPosition(new Point(650, 448));
 			bomb.setStartingPosition(new Point(650, 448));
+			bomb.setMovable(false);
 			board.addPieceAtIndex(bomb, 15);
 			battery = new Piece("battery", "battery.png", 5, -5, 0, 0);
 			battery.setPosition(new Point(650, 307));
 			battery.setStartingPosition(new Point(650, 307));
+			battery.setMovable(false);
 			board.addPieceAtIndex(battery, 10);
 			p15 = new Piece("topRightStuck", "TopRight.png", 1, -5, 0, 0);
 			p15.setPosition(new Point(650, 589));
 			p15.setStartingPosition(new Point(650, 589));
 			board.addPieceAtIndex(p15, 20);
+			p15.setMovable(false);
 
 			board.setBatteryIndex(10);
 			board.setBombIndex(15);
@@ -326,34 +327,42 @@ public class FinalProject extends Game{
 		    p1 = new Piece("horizontalWire", "Horizontal.png", -1, 1, 0, 0);
 			p1.setPosition(new Point(185, 25));
 			p1.setStartingPosition(new Point(185, 25));
+			p1.setMovable(true);
 			addPieceAtIndex(p1, 0);
 			p2 = new Piece("verticalWire", "Vertical.png", -5, 5, 0, 0);
             p2.setPosition(new Point(331, 25));
             p2.setStartingPosition(new Point(331, 25));
+            p2.setMovable(true);
             addPieceAtIndex(p2, 1);
             p3 = new Piece("topLeft", "TopLeft.png", -1, -5, 0, 0);
             p3.setPosition(new Point(477, 25));
             p3.setStartingPosition(new Point(477, 25));
+            p3.setMovable(true);
             addPieceAtIndex(p3, 2);
             p4 = new Piece("bottomLeft", "BottomLeft.png", -1, 5, 0, 0);
             p4.setPosition(new Point(185, 171));
             p4.setStartingPosition(new Point(185, 171));
+            p4.setMovable(true);
             addPieceAtIndex(p4, 3);
             p5 = new Piece("topRight", "TopRight.png", -5, 1, 0, 0);
             p5.setPosition(new Point(331, 171));
             p5.setStartingPosition(new Point(331, 171));
+            p5.setMovable(true);
             addPieceAtIndex(p5, 4);
             p6 = new Piece("bottomRight", "BottomRight.png", 5, 1, 0, 0);
             p6.setPosition(new Point(477, 171));
             p6.setStartingPosition(new Point(477, 171));
+            p6.setMovable(true);
             addPieceAtIndex(p6, 5);
             p7 = new Piece("horizontalResistor", "resistorHorizontal5.png", -5, 1, 0, 5);
             p7.setPosition(new Point(185, 317));
             p7.setStartingPosition(new Point(185, 317));
+            p7.setMovable(true);
             addPieceAtIndex(p7, 6);
             p8 = new Piece("verticalResistor", "resistorVertical10.png", 5, 1, 0, 10);
             p8.setPosition(new Point(331, 317));
             p8.setStartingPosition(new Point(331, 317));
+            p8.setMovable(true);
             addPieceAtIndex(p8, 7);
 		}
 		else if (level == 2)
