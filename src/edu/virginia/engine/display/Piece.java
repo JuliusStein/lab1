@@ -39,13 +39,19 @@ public class Piece extends DisplayObject {
         this.hasResistance = res;
     }
 
-    public Piece(int start, int end, int volt, int res)
+    public Piece(String id, String filename, int start, int end, int volt, int res)
     {
-        super("");
+        super(id, filename);
         this.start = start;
         this.end = end;
-        this.hasVoltage = true;
-        this.hasResistance = true;
+        if(voltage!=0)
+            this.hasVoltage = true;
+        else
+            this.hasVoltage = false;
+        if(resistance!=0)
+            this.hasResistance = true;
+        else
+            this.hasResistance = false;
         this.voltage = volt;
         this.resistance = res;
     }

@@ -23,6 +23,8 @@ public class FinalProject extends Game{
 	static Board board = new Board("board", "board.png");
 	static DisplayObject background = new DisplayObject("background", "background.png");
     static DisplayObject partBank = new DisplayObject("partBank", "partBank.png");
+    static Piece p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15;
+    static ArrayList<Piece> bank = new ArrayList<Piece>();
 
     static SoundManager sound = new SoundManager();
     @SuppressWarnings("unused")
@@ -34,6 +36,23 @@ public class FinalProject extends Game{
      * */
     public FinalProject() {
         super("Final Project Game", 1385, 775);
+    }
+
+    public static void addPieceAtIndex(Piece newPiece, int index){
+        newPiece.setIndex(index);
+        if((index<bank.size())&&(index >= 0)){
+            bank.add(index, newPiece);
+        }else{
+            bank.add(newPiece);
+        }
+    }
+
+    public static void removePieceAtIndex(int index){
+        bank.remove(index);
+    }
+
+    public static Piece getPieceAtIndex(int index){
+        return bank.get(index);
     }
 
     /**
@@ -102,18 +121,18 @@ public class FinalProject extends Game{
         if(partBank != null) partBank.draw(g);
 
         g.setColor(Color.GREEN);
-        g.fillRect(25, 290, 150, 50);
+        g.fillRect(15, 290, 150, 50);
 
         g.setColor(Color.YELLOW);
-        g.fillRect(25, 365, 150, 50);
+        g.fillRect(15, 365, 150, 50);
 
         g.setColor(Color.RED);
-        g.fillRect(25, 440, 150, 50);
+        g.fillRect(15, 440, 150, 50);
 
         g.setColor(Color.BLACK);
-        g.drawString("CHECK",75, 320);
-        g.drawString("HINT",80, 395);
-        g.drawString("QUIT",80, 470);
+        g.drawString("CHECK",65, 320);
+        g.drawString("HINT",70, 395);
+        g.drawString("QUIT",70, 470);
 
         g.fillRect(790, 25, 5,700);
         g.fillRect(930, 25, 5,700);
@@ -125,6 +144,13 @@ public class FinalProject extends Game{
         g.fillRect(650, 445, 700, 5);
         g.fillRect(650, 585, 700, 5);
 
+        for(int i=0; i<bank.size(); i++){
+            getPieceAtIndex(i).draw(g);
+        }
+
+        for(int j=0; j<board.getPieces().size(); j++){
+            board.getPieceAtIndex(j).draw(g);
+        }
 
 
         /* Same, just check for null in case a frame gets thrown in before Mario is initialized */
@@ -154,11 +180,11 @@ public class FinalProject extends Game{
 
         //mario.populate();
         background.setPosition(new Point(0,0));
-        partBank.setPosition(new Point(225,25));
+        partBank.setPosition(new Point(185,25));
         board.setPosition(new Point(650,25));
 
-        Scanner in = new Scanner(System.in);
-        String input = "";
+//        Scanner in = new Scanner(System.in);
+//        String input = "";
 //        System.out.println("Please input the level you would like to play (\"1\", \"2\", or \"3\")");
 //        
 //        input = in.nextLine();
@@ -246,7 +272,30 @@ public class FinalProject extends Game{
 	{
 		if (level == 1)
 		{
-			
+		    p1 = new Piece("horizontalWire", "Horizontal.png", -1, 1, 0, 0);
+			p1.setPosition(new Point(185, 25));
+			addPieceAtIndex(p1, 0);
+			p2 = new Piece("verticalWire", "Vertical.png", -5, 5, 0, 0);
+            p2.setPosition(new Point(331, 25));
+            addPieceAtIndex(p2, 1);
+            p3 = new Piece("topLeft", "TopLeft.png", -1, -5, 0, 0);
+            p3.setPosition(new Point(477, 25));
+            addPieceAtIndex(p3, 2);
+            p4 = new Piece("bottomLeft", "BottomLeft.png", -1, 5, 0, 0);
+            p4.setPosition(new Point(185, 171));
+            addPieceAtIndex(p4, 3);
+            p5 = new Piece("topRight", "TopRight.png", -5, 1, 0, 0);
+            p5.setPosition(new Point(331, 171));
+            addPieceAtIndex(p5, 4);
+            p6 = new Piece("bottomRight", "BottomRight.png", 5, 1, 0, 0);
+            p6.setPosition(new Point(477, 171));
+            addPieceAtIndex(p6, 5);
+            p7 = new Piece("horizontalResistor", "resistorHorizontal5.png", -5, 1, 0, 5);
+            p7.setPosition(new Point(185, 317));
+            addPieceAtIndex(p7, 6);
+            p8 = new Piece("verticalResistor", "resistorVertical10.png", 5, 1, 0, 10);
+            p8.setPosition(new Point(331, 317));
+            addPieceAtIndex(p8, 7);
 		}
 		else if (level == 2)
 		{

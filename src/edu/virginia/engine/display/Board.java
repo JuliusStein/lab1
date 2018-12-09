@@ -44,16 +44,16 @@ public class Board extends DisplayObject {
         }
     }
 
-    public void removeChild(Piece piece){
+    public void removePiece(Piece piece){
         this.pieces.remove(piece);
     }
 
-    public void removeChildAtIndex(int index){
+    public void removePieceAtIndex(int index){
         this.pieces.remove(index);
         taken[index/5][index%5] = false;
     }
 
-    public void removeAllChildren(){
+    public void removeAllPieces(){
         this.pieces.clear();
     }
 
@@ -63,7 +63,7 @@ public class Board extends DisplayObject {
 
 
 
-    public Piece getChild(String id){
+    public Piece getPiece(String id){
         for(int i=0; i<this.pieces.size(); i++){
             if(getPieceAtIndex(i).getId() == id){
                 return getPieceAtIndex(i);
@@ -83,6 +83,14 @@ public class Board extends DisplayObject {
             }
         }
         return false;
+    }
+
+    public ArrayList<Piece> getPieces() {
+        return pieces;
+    }
+
+    public void setPieces(ArrayList<Piece> pieces) {
+        this.pieces = pieces;
     }
 
     public int getBatteryIndex() {
