@@ -129,12 +129,21 @@ public class FinalProject extends Game{
         }
         else if (pickedUp == true)
         {
-        	// TODO: this
-        	// drop the piece this time
-        	
-        	// determine what board square you are in with coordinates
-        	// determine if a piece is there, if not, place the piece in hold down
-        	// populate the array section on the board if so
+        	if (p.getX() >= 650 && p.getX() <= 1350 && p.getY() >= 75 && p.getY() <= 775)
+        	{
+        		int x = (int) ((p.getX() - 650) / 141);
+        		int y = (int) ((p.getY() - 75) / 141);		
+        		
+        		if (board.getTaken()[x][y])
+        			inHand.setPosition(inHand.getStartingPosition());
+        		else
+        		{
+        			// JULIUS THIS IS THE PLACE THAT IS HAVING ISSUES BECAUSE OF THE ADDPIECEATINDEX FUNCTION!!!!
+        			// CHANGE BOARD.JAVA SO PIECES IS AN ARRAY AND NOT ARRAYLIST, THANK YOU BB LOVE YOUUUUUUU
+        			inHand.setPosition(new Point(650 + (x * 141), 25 + (y * 141)));
+        			board.addPieceAtIndex(inHand, 5 * y + x);
+        		}
+        	}
         	
         	pickedUp = false;
         	inHand = null;

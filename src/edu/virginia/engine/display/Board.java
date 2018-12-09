@@ -19,7 +19,6 @@ public class Board extends DisplayObject {
         for(int i=0; i<5; i++)
             for(int j=0; j<5; j++)
                 this.taken[i][j] = false;
-        // TODO Auto-generated constructor stub
     }
 
     public Board(String id, String filename) {
@@ -27,7 +26,6 @@ public class Board extends DisplayObject {
         for(int i=0; i<5; i++)
             for(int j=0; j<5; j++)
                 this.taken[i][j] = false;
-        // TODO Auto-generated constructor stub
     }
 
     public void addPiece(Piece newPiece){
@@ -38,7 +36,7 @@ public class Board extends DisplayObject {
         newPiece.setIndex(index);
         if((index<this.pieces.size())&&(index >= 0)){
             this.pieces.add(index, newPiece);
-            taken[index/5][index%5] = true;
+            taken[index%5][index/5] = true;
         }else{
             this.pieces.add(newPiece);
         }
@@ -50,7 +48,7 @@ public class Board extends DisplayObject {
 
     public void removePieceAtIndex(int index){
         this.pieces.remove(index);
-        taken[index/5][index%5] = false;
+        taken[index%5][index/5] = false;
     }
 
     public void removeAllPieces(){
@@ -171,6 +169,11 @@ public class Board extends DisplayObject {
 
     public boolean hasCorrectCurrent(){
         return false;
+    }
+    
+    public boolean[][] getTaken()
+    {
+    	return this.taken;
     }
 
 }
