@@ -18,6 +18,7 @@ public class FinalProject extends Game{
 	static Board board = new Board("board", "board.png");
 	static DisplayObject background = new DisplayObject("background", "background.png");
     static DisplayObject partBank = new DisplayObject("partBank", "partBank.png");
+    static DisplayObject congratulations = new DisplayObject("congratulations", "congratulations.png");
     static Piece p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, bomb, battery;
     static ArrayList<Piece> bank = new ArrayList<Piece>();
     static Piece inHand = null;
@@ -29,6 +30,7 @@ public class FinalProject extends Game{
     @SuppressWarnings("unused")
     private boolean hitBox = false;
     private boolean pickedUp = false;
+    private boolean finished = false;
 
     /**
      * Constructor. See constructor in Game.java for details on the parameters given
@@ -118,10 +120,17 @@ public class FinalProject extends Game{
         	
         	if (p.getX() >= 15 && p.getX() <= 165 && p.getY() >= 340 && p.getY() <= 390)
         	{
-        		System.out.println("inside the green");
         		// TODO: this
-        		
-        		// call the check correct method or whatever we want to call it
+        		if (false/*board.hasCorrectResistance()*/)
+        		{
+        			// print out you win whoop de doo
+        			sound.playSoundEffect("right");
+        			finished = true;
+        		}
+        		else
+        		{
+        			sound.playSoundEffect("wrong");
+        		}
         	}
         	if (p.getX() >= 15 && p.getX() <= 165 && p.getY() >= 415 && p.getY() <= 465)
         	{
@@ -148,8 +157,6 @@ public class FinalProject extends Game{
         			inHand.setPosition(inHand.getStartingPosition());
         		else
         		{
-        			// JULIUS THIS IS THE PLACE THAT IS HAVING ISSUES BECAUSE OF THE ADDPIECEATINDEX FUNCTION!!!!
-        			// CHANGE BOARD.JAVA SO PIECES IS AN ARRAY AND NOT ARRAYLIST, THANK YOU BB LOVE YOUUUUUUU
         			inHand.setPosition(new Point(650 + (x * 141), 25 + (y * 141)));
         			board.addPieceAtIndex(inHand, 5 * y + x);
         		}
@@ -206,6 +213,9 @@ public class FinalProject extends Game{
                 board.getPieceAtIndex(j).draw(g);
             }
         }
+        
+        if (finished)
+        	if (congratulations != null) congratulations.draw(g);
     }
 
     /**
@@ -216,17 +226,15 @@ public class FinalProject extends Game{
     public static void main(String[] args) throws IOException {
         FinalProject game = new FinalProject();
 
-//		sound.loadSoundEffect("jump", "resources/jump.wav");
-//		sound.loadSoundEffect("death", "resources/death.wav");
-//		sound.loadSoundEffect("win", "resources/win.wav");
-//		sound.loadMusic("theme", "resources/theme.wav");
+		sound.loadSoundEffect("wrong", "resources/wrong.wav");
+		sound.loadSoundEffect("right", "resources/right.wav");
 
         //sound.playMusic("theme");
 
-        //mario.populate();
         background.setPosition(new Point(0,0));
         partBank.setPosition(new Point(185,25));
         board.setPosition(new Point(650,25));
+        congratulations.setPosition(new Point(343, 264));
                 
         final JFrame parent = new JFrame();
         

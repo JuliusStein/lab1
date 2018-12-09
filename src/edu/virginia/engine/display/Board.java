@@ -1,7 +1,5 @@
 package edu.virginia.engine.display;
 
-import java.util.ArrayList;
-
 public class Board extends DisplayObject {
     private Piece[] pieces  = new Piece[25];
     private boolean[][] taken = new boolean[5][5];
