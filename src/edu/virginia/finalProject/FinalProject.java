@@ -191,8 +191,10 @@ public class FinalProject extends Game{
             getPieceAtIndex(i).draw(g);
         }
 
-        for(int j=0; j<board.getPieces().size(); j++){
-            board.getPieceAtIndex(j).draw(g);
+        for(int j=0; j<25; j++){
+            if(board.getPieceAtIndex(j) != null){
+                board.getPieceAtIndex(j).draw(g);
+            }
         }
     }
 
@@ -298,6 +300,11 @@ public class FinalProject extends Game{
 			p15.setPosition(new Point(650, 589));
 			p15.setStartingPosition(new Point(650, 589));
 			board.addPieceAtIndex(p15, 20);
+
+			board.setBatteryIndex(10);
+			board.setBombIndex(15);
+			board.setFinalResistance(30);
+			board.setBatteryVoltage(0);
 			
 		    p1 = new Piece("horizontalWire", "Horizontal.png", -1, 1, 0, 0);
 			p1.setPosition(new Point(185, 25));

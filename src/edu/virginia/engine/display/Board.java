@@ -3,7 +3,7 @@ package edu.virginia.engine.display;
 import java.util.ArrayList;
 
 public class Board extends DisplayObject {
-    private ArrayList<Piece> pieces = new ArrayList<Piece>();
+    private Piece[] pieces  = new Piece[25];
     private boolean[][] taken = new boolean[5][5];
     private int batteryIndex;
     private int bombIndex;
@@ -16,66 +16,80 @@ public class Board extends DisplayObject {
 
     public Board(String id) {
         super(id);
-        for(int i=0; i<5; i++)
-            for(int j=0; j<5; j++)
+        for(int i=0; i<5; i++) {
+            for (int j = 0; j < 5; j++) {
                 this.taken[i][j] = false;
+            }
+        }
+        for(int j=0; j<25; j++){
+            pieces[j] = null;
+        }
+
     }
 
     public Board(String id, String filename) {
         super(id, filename);
-        for(int i=0; i<5; i++)
-            for(int j=0; j<5; j++)
+        for(int i=0; i<5; i++) {
+            for (int j = 0; j < 5; j++) {
                 this.taken[i][j] = false;
+            }
+        }
+        for(int j=0; j<25; j++){
+            pieces[j] = null;
+        }
     }
 
     public void addPiece(Piece newPiece){
-        this.pieces.add(newPiece);
+        this.pieces[pieces.length] = newPiece;
     }
 
     public void addPieceAtIndex(Piece newPiece, int index){
         newPiece.setIndex(index);
-        if((index<this.pieces.size())&&(index >= 0)){
-            this.pieces.add(index, newPiece);
+        if((index<this.pieces.length)&&(index >= 0)){
+            this.pieces[index] = newPiece;
             taken[index%5][index/5] = true;
         }else{
-            this.pieces.add(newPiece);
+            addPiece(newPiece);
         }
     }
 
-    public void removePiece(Piece piece){
-        this.pieces.remove(piece);
-    }
-
-    public void removePieceAtIndex(int index){
-        this.pieces.remove(index);
+    public Piece removePieceAtIndex(int index){
+        Piece toReturn = this.pieces[index];
+        this.pieces[index] = null;
         taken[index%5][index/5] = false;
+        return toReturn;
     }
 
     public void removeAllPieces(){
-        this.pieces.clear();
+        for(int i=0; i<this.pieces.length; i++){
+            this.pieces[i] = null;
+        }
     }
 
     public boolean contains(Piece piece){
-        return this.pieces.contains(piece);
+        for(int i=0; i<this.pieces.length; i++){
+            if (this.pieces[i].getId() == piece.getId())
+                return true;
+        }
+        return false;
     }
 
 
 
     public Piece getPiece(String id){
-        for(int i=0; i<this.pieces.size(); i++){
-            if(getPieceAtIndex(i).getId() == id){
-                return getPieceAtIndex(i);
-            }
+        for(int i=0; i<this.pieces.length; i++){
+            if (this.pieces[i].getId() == id)
+                return this.pieces[i];
         }
         return null;
     }
 
     public Piece getPieceAtIndex(int index){
-        return this.pieces.get(index);
+        return pieces[index];
     }
 
     public boolean contains(String id){
-        for(int i=0; i<this.pieces.size(); i++){
+        for(int i=0; i<this.pieces.length; i++){
             if(getPieceAtIndex(i).getId() == id){
                 return true;
             }
@@ -83,11 +97,11 @@ public class Board extends DisplayObject {
         return false;
     }
 
-    public ArrayList<Piece> getPieces() {
-        return pieces;
+    public Piece[] getPieces() {
+        return this.pieces;
     }
 
-    public void setPieces(ArrayList<Piece> pieces) {
+    public void setPieces(Piece[] pieces) {
         this.pieces = pieces;
     }
 
