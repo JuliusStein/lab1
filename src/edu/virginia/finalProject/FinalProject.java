@@ -21,6 +21,8 @@ public class FinalProject extends Game{
     static Piece p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, bomb, battery;
     static ArrayList<Piece> bank = new ArrayList<Piece>();
     static Piece inHand = null;
+    static double offsetx = 0;
+    static double offsety = 0;
 
     static SoundManager sound = new SoundManager();
     @SuppressWarnings("unused")
@@ -62,9 +64,11 @@ public class FinalProject extends Game{
         Point p = MouseInfo.getPointerInfo().getLocation();
         
         if (pickedUp)
-        {
-        	inHand.setPosition(p);
-        	p.setLocation(p.x, p.y - 50); // go back to the pickup point in bank and put a mouse offset and keep that, also create those vars up top
+        {	
+        	if (inHand != null)
+        		inHand.setPosition(new Point((int)(p.x - offsetx), (int)(p.y - 50 - offsety)));
+        	else
+        		pickedUp = false;
         }
 
         if (pressedMouse.contains((Integer)1))
@@ -73,11 +77,6 @@ public class FinalProject extends Game{
         	{
 	        	if (p.getX() >= 185 && p.getX() <= 623 && p.getY() >= 75 && p.getY() <= 775)
 	        	{
-	        		System.out.println("inside the bank");
-	        		
-	        		// TODO: this
-	        		// determine if on top of a piece by iterating through pieces in bank arrayList
-	        		// if on top of one, pick that piece up, then empty it inside the pieces in bank array
 	        		for (int i = 0; i < bank.size(); i++)
 	        		{
 	        			Piece pieceI = bank.get(i);
@@ -87,7 +86,11 @@ public class FinalProject extends Game{
 	        					p.getX() <= (pieceI.getPosition().x + 136)  && 
 	        					p.getY() >= (pieceI.getPosition().y + 50) && 
 	        					p.getY() <= (pieceI.getPosition().y + 136 + 50))
+	        				{
 	        					inHand = pieceI;
+	        					offsetx = p.getX() - pieceI.getPosition().x;
+	        					offsety = p.getY() - (pieceI.getPosition().y + 50);
+	        				}
 	        			}
 	        		}
 	        	}
@@ -120,7 +123,8 @@ public class FinalProject extends Game{
         	if (p.getX() >= 15 && p.getX() <= 165 && p.getY() >= 490 && p.getY() <= 540)
         	{	
         		getMainFrame().setVisible(false);
-            	getMainFrame().dispose();      	
+            	getMainFrame().dispose();   
+            	System.exit(0);
             }
         }
         else if (pickedUp == true)
@@ -133,6 +137,9 @@ public class FinalProject extends Game{
         	// populate the array section on the board if so
         	
         	pickedUp = false;
+        	inHand = null;
+        	offsetx = 0;
+        	offsety = 0;
         }
     }
 
