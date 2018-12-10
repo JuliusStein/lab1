@@ -192,7 +192,31 @@ public class Board extends DisplayObject {
     }
 
     public boolean hasCorrectCurrent(){
-        return false;
+    	Piece start = getPieceAtIndex(this.batteryIndex-5);
+        int netResistance = 0;
+        int previousEnd = -5;
+
+        for(Piece p = start; p.getIndex() !=  bombIndex; p = getPieceAtIndex(p.getIndex() + p.getEnd())){
+        	if(p.getStart() != (-1*previousEnd)){
+        		int t = p.getEnd();
+        		p.setEnd(p.getStart());
+        		p.setStart(t);
+        	}
+        	if(p.isHasResistance()){
+                netResistance+=p.getResistance();
+            }
+        	if(getPieceAtIndex(p.getIndex() + p.getEnd()) == null){
+        		return false;
+        	}else{
+        		previousEnd = p.getEnd();
+        	}
+        }
+        
+        if(batteryVoltage / netResistance == getFinalCurrent()){
+            return true;
+        }else{
+            return false;
+        }
     }
     
     public boolean[][] getTaken()

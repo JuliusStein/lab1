@@ -123,7 +123,6 @@ public class FinalProject extends Game{
         		// TODO: this
         		if (board.hasCorrectResistance())
         		{
-        			// print out you win whoop de doo
         			sound.playSoundEffect("right");
         			finished = true;
         		}
@@ -311,7 +310,7 @@ public class FinalProject extends Game{
 	{
 		if (level == 1)
 		{	
-			bomb = new Piece("bomb", "bomb.png", 5, -5, 0, 0);
+			bomb = new Piece("bomb", "bomb1.png", 5, -5, 0, 0);
 			bomb.setPosition(new Point(650, 448));
 			bomb.setStartingPosition(new Point(650, 448));
 			bomb.setMovable(false);
@@ -375,11 +374,171 @@ public class FinalProject extends Game{
 		}
 		else if (level == 2)
 		{
+			bomb = new Piece("bomb", "bomb2.png", 5, -5, 0, 0);
+			bomb.setPosition(new Point(932, 448));
+			bomb.setStartingPosition(new Point(932, 448));
+			bomb.setMovable(false);
+			board.addPieceAtIndex(bomb, 17);
+			battery = new Piece("battery", "battery2.png", 5, -5, 0, 0);
+			battery.setPosition(new Point(650, 307));
+			battery.setStartingPosition(new Point(650, 307));
+			battery.setMovable(false);
+			board.addPieceAtIndex(battery, 10);
+			p15 = new Piece("topRightStuck", "TopRight.png", 1, -5, 0, 0);
+			p15.setPosition(new Point(650, 448));
+			p15.setStartingPosition(new Point(650, 448));
+			board.addPieceAtIndex(p15, 15);
+			p15.setMovable(false);
+			p14 = new Piece("bottomLeftStuck", "BottomLeft.png", -1, 5, 0, 0);
+			p14.setPosition(new Point(932, 307));
+			p14.setStartingPosition(new Point(932, 307));
+			board.addPieceAtIndex(p14, 12);
+			p14.setMovable(false);
+			p13 = new Piece("topRightStuck2", "TopRight.png", 1, -5, 0, 0);
+			p13.setPosition(new Point(932, 589));
+			p13.setStartingPosition(new Point(932, 589));
+			board.addPieceAtIndex(p13, 22);
+			p13.setMovable(false);
+
+			board.setBatteryIndex(10);
+			board.setBombIndex(17);
+			board.setFinalResistance(20);
+			board.setBatteryVoltage(60);
 			
+			p1 = new Piece("horizontalWire", "Horizontal.png", -1, 1, 0, 0);
+			p1.setPosition(new Point(185, 25));
+			p1.setStartingPosition(new Point(185, 25));
+			p1.setMovable(true);
+			addPieceAtIndex(p1, 0);
+			p2 = new Piece("botRight", "BottomRight.png", 5, 1, 0, 0);
+			p2.setPosition(new Point(331, 25));
+			p2.setStartingPosition(new Point(331, 25));
+			p2.setMovable(true);
+			addPieceAtIndex(p2, 1);
+			p3 = new Piece("botLeft", "BottomLeft.png", 5, -1, 0, 0);
+			p3.setPosition(new Point(477, 25));
+			p3.setStartingPosition(new Point(477, 25));
+			p3.setMovable(true);
+			addPieceAtIndex(p3, 2);
+			p4 = new Piece("topLeft", "TopLeft.png", -5, -1, 0, 0);
+			p4.setPosition(new Point(185, 171));
+			p4.setStartingPosition(new Point(185, 171));
+			p4.setMovable(true);
+			addPieceAtIndex(p4, 3);
+			p5 = new Piece("botRight2", "BottomRight.png", 5, 1, 0, 0);
+			p5.setPosition(new Point(331, 171));
+			p5.setStartingPosition(new Point(331, 171));
+			p5.setMovable(true);
+			addPieceAtIndex(p5, 4);
+			p6 = new Piece("topLeft2", "TopLeft.png", -5, 1, 0, 0);
+			p6.setPosition(new Point(477, 171));
+			p6.setStartingPosition(new Point(477, 171));
+			p6.setMovable(true);
+			addPieceAtIndex(p6, 5);
+			p7 = new Piece("horizontalResistor", "resistorHorizontal10.png", -1, 1, 0, 0);
+			p7.setPosition(new Point(185, 317));
+			p7.setStartingPosition(new Point(185, 317));
+			p7.setMovable(true);
+			addPieceAtIndex(p7, 6);
+			p8 = new Piece("verticalResistor", "resistorVertical5.png", -5, 5, 0, 0);
+			p8.setPosition(new Point(331, 317));
+			p8.setStartingPosition(new Point(331, 317));
+			p8.setMovable(true);
+			addPieceAtIndex(p8, 7);
+			p9 = new Piece("verticalResistor2", "resistorVertical5.png", -5, 5, 0, 0);
+			p9.setPosition(new Point(477, 317));
+			p9.setStartingPosition(new Point(477, 317));
+			p9.setMovable(true);
+			addPieceAtIndex(p9, 8);
 		}
 		else if (level == 3)
 		{
+			bomb = new Piece("bomb", "bomb3.png", 5, -5, 0, 0);
+			bomb.setPosition(new Point(932, 448));
+			bomb.setStartingPosition(new Point(932, 448));
+			bomb.setMovable(false);
+			board.addPieceAtIndex(bomb, 17);
+			battery = new Piece("battery", "battery3.png", 5, -5, 0, 0);
+			battery.setPosition(new Point(650, 166));
+			battery.setStartingPosition(new Point(650, 166));
+			battery.setMovable(false);
+			board.addPieceAtIndex(battery, 5);
+			p15 = new Piece("botRightStuck", "BottomRight.png", 1, 5, 0, 0);
+			p15.setPosition(new Point(650, 25));
+			p15.setStartingPosition(new Point(650, 25));
+			board.addPieceAtIndex(p15, 10);
+			p15.setMovable(false);
+			p14 = new Piece("topRightStuck", "TopRight.png", -5, 1, 0, 0);
+			p14.setPosition(new Point(650, 307));
+			p14.setStartingPosition(new Point(650, 307));
+			board.addPieceAtIndex(p14, 0);
+			p14.setMovable(false);
+			p13 = new Piece("verticalStuck", "Vertical.png", 5, -5, 0, 0);
+			p13.setPosition(new Point(1214, 166));
+			p13.setStartingPosition(new Point(1214, 166));
+			board.addPieceAtIndex(p13, 9);
+			p13.setMovable(false);
+			p12 = new Piece("verticalStuck2", "Vertical.png", 5, -5, 0, 0);
+			p12.setPosition(new Point(1214, 307));
+			p12.setStartingPosition(new Point(1214, 307));
+			board.addPieceAtIndex(p12, 14);
+			p12.setMovable(false);
+			p11 = new Piece("horizontalResistorStuck", "resistorHorizontal5.png", 1, -1, 0, 0);
+			p11.setPosition(new Point(932, 25));
+			p11.setStartingPosition(new Point(92, 25));
+			board.addPieceAtIndex(p11, 2);
+			p11.setMovable(false);
 			
+			board.setBatteryIndex(5);
+			board.setBombIndex(17);
+			board.setFinalResistance(25);
+			board.setBatteryVoltage(100);
+			
+			p1 = new Piece("horizontalWire", "Horizontal.png", -1, 1, 0, 0);
+			p1.setPosition(new Point(185, 25));
+			p1.setStartingPosition(new Point(185, 25));
+			p1.setMovable(true);
+			addPieceAtIndex(p1, 0);
+			p2 = new Piece("horizontalResistor5", "resistorHorizontal5.png", -1, 1, 0, 0);
+			p2.setPosition(new Point(331, 25));
+			p2.setStartingPosition(new Point(331, 25));
+			p2.setMovable(true);
+			addPieceAtIndex(p2, 1);
+			p3 = new Piece("botLeft", "BottomLeft.png", 5, -1, 0, 0);
+			p3.setPosition(new Point(477, 25));
+			p3.setStartingPosition(new Point(477, 25));
+			p3.setMovable(true);
+			addPieceAtIndex(p3, 2);
+			p4 = new Piece("verticalResistor5", "resistorVertical5.png", -5, 5, 0, 0);
+			p4.setPosition(new Point(185, 171));
+			p4.setStartingPosition(new Point(185, 171));
+			p4.setMovable(true);
+			addPieceAtIndex(p4, 3);
+			p5 = new Piece("topLeft", "TopLeft.png", -5, -1, 0, 0);
+			p5.setPosition(new Point(331, 171));
+			p5.setStartingPosition(new Point(331, 171));
+			p5.setMovable(true);
+			addPieceAtIndex(p5, 4);
+			p6 = new Piece("horizontalResistor10", "resistorHorizontal10.png", -1, 1, 0, 0);
+			p6.setPosition(new Point(477, 171));
+			p6.setStartingPosition(new Point(477, 171));
+			p6.setMovable(true);
+			addPieceAtIndex(p6, 5);
+			p7 = new Piece("topRight", "TopRight.png", -5, 1, 0, 0);
+			p7.setPosition(new Point(185, 317));
+			p7.setStartingPosition(new Point(185, 317));
+			p7.setMovable(true);
+			addPieceAtIndex(p7, 6);
+			p8 = new Piece("horizontalWire2", "Horizontal.png", -1, 1, 0, 0);
+			p8.setPosition(new Point(331, 317));
+			p8.setStartingPosition(new Point(331, 317));
+			p8.setMovable(true);
+			addPieceAtIndex(p8, 7);
+			p9 = new Piece("botLeft2", "BottomLeft.png", 5, -1, 0, 0);
+			p9.setPosition(new Point(477, 317));
+			p9.setStartingPosition(new Point(477, 317));
+			p9.setMovable(true);
+			addPieceAtIndex(p9, 8);
 		}
 	}
 }
