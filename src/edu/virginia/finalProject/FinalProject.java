@@ -121,15 +121,16 @@ public class FinalProject extends Game{
         	if (p.getX() >= 15 && p.getX() <= 165 && p.getY() >= 340 && p.getY() <= 390)
         	{
         		// TODO: this
-        		if (board.hasCorrectResistance())
-        		{
-        			sound.playSoundEffect("right");
-        			finished = true;
-        		}
-        		else
-        		{
-        			sound.playSoundEffect("wrong");
-        		}
+                if (board.hasCorrectResistance())
+                {
+                    sound.playSoundEffect("right");
+                    finished = true;
+                }
+                else
+                {
+                    sound.playSoundEffect("wrong");
+                }
+
         	}
         	if (p.getX() >= 15 && p.getX() <= 165 && p.getY() >= 415 && p.getY() <= 465)
         	{
@@ -403,6 +404,7 @@ public class FinalProject extends Game{
 			board.setBatteryIndex(10);
 			board.setBombIndex(17);
 			board.setFinalResistance(20);
+			board.setFinalCurrent(3);
 			board.setBatteryVoltage(60);
 			
 			p1 = new Piece("horizontalWire", "Horizontal.png", -1, 1, 0, 0);
@@ -430,22 +432,22 @@ public class FinalProject extends Game{
 			p5.setStartingPosition(new Point(331, 171));
 			p5.setMovable(true);
 			addPieceAtIndex(p5, 4);
-			p6 = new Piece("topLeft2", "TopLeft.png", -5, 1, 0, 0);
+			p6 = new Piece("topLeft2", "TopLeft.png", -5, -1, 0, 0);
 			p6.setPosition(new Point(477, 171));
 			p6.setStartingPosition(new Point(477, 171));
 			p6.setMovable(true);
 			addPieceAtIndex(p6, 5);
-			p7 = new Piece("horizontalResistor", "resistorHorizontal10.png", -1, 1, 0, 0);
+			p7 = new Piece("horizontalResistor", "resistorHorizontal10.png", -1, 1, 0, 10);
 			p7.setPosition(new Point(185, 317));
 			p7.setStartingPosition(new Point(185, 317));
 			p7.setMovable(true);
 			addPieceAtIndex(p7, 6);
-			p8 = new Piece("verticalResistor", "resistorVertical5.png", -5, 5, 0, 0);
+			p8 = new Piece("verticalResistor", "resistorVertical5.png", -5, 5, 0, 5);
 			p8.setPosition(new Point(331, 317));
 			p8.setStartingPosition(new Point(331, 317));
 			p8.setMovable(true);
 			addPieceAtIndex(p8, 7);
-			p9 = new Piece("verticalResistor2", "resistorVertical5.png", -5, 5, 0, 0);
+			p9 = new Piece("verticalResistor2", "resistorVertical5.png", -5, 5, 0, 5);
 			p9.setPosition(new Point(477, 317));
 			p9.setStartingPosition(new Point(477, 317));
 			p9.setMovable(true);
@@ -466,12 +468,12 @@ public class FinalProject extends Game{
 			p15 = new Piece("botRightStuck", "BottomRight.png", 1, 5, 0, 0);
 			p15.setPosition(new Point(650, 25));
 			p15.setStartingPosition(new Point(650, 25));
-			board.addPieceAtIndex(p15, 10);
+			board.addPieceAtIndex(p15, 0);
 			p15.setMovable(false);
 			p14 = new Piece("topRightStuck", "TopRight.png", -5, 1, 0, 0);
 			p14.setPosition(new Point(650, 307));
 			p14.setStartingPosition(new Point(650, 307));
-			board.addPieceAtIndex(p14, 0);
+			board.addPieceAtIndex(p14, 10);
 			p14.setMovable(false);
 			p13 = new Piece("verticalStuck", "Vertical.png", 5, -5, 0, 0);
 			p13.setPosition(new Point(1214, 166));
@@ -483,7 +485,7 @@ public class FinalProject extends Game{
 			p12.setStartingPosition(new Point(1214, 307));
 			board.addPieceAtIndex(p12, 14);
 			p12.setMovable(false);
-			p11 = new Piece("horizontalResistorStuck", "resistorHorizontal5.png", 1, -1, 0, 0);
+			p11 = new Piece("horizontalResistorStuck", "resistorHorizontal5.png", 1, -1, 0, 5);
 			p11.setPosition(new Point(932, 25));
 			p11.setStartingPosition(new Point(92, 25));
 			board.addPieceAtIndex(p11, 2);
@@ -492,6 +494,7 @@ public class FinalProject extends Game{
 			board.setBatteryIndex(5);
 			board.setBombIndex(17);
 			board.setFinalResistance(25);
+			board.setFinalCurrent(4);
 			board.setBatteryVoltage(100);
 			
 			p1 = new Piece("horizontalWire", "Horizontal.png", -1, 1, 0, 0);
@@ -499,7 +502,7 @@ public class FinalProject extends Game{
 			p1.setStartingPosition(new Point(185, 25));
 			p1.setMovable(true);
 			addPieceAtIndex(p1, 0);
-			p2 = new Piece("horizontalResistor5", "resistorHorizontal5.png", -1, 1, 0, 0);
+			p2 = new Piece("horizontalResistor5", "resistorHorizontal5.png", -1, 1, 0, 5);
 			p2.setPosition(new Point(331, 25));
 			p2.setStartingPosition(new Point(331, 25));
 			p2.setMovable(true);
@@ -509,7 +512,7 @@ public class FinalProject extends Game{
 			p3.setStartingPosition(new Point(477, 25));
 			p3.setMovable(true);
 			addPieceAtIndex(p3, 2);
-			p4 = new Piece("verticalResistor5", "resistorVertical5.png", -5, 5, 0, 0);
+			p4 = new Piece("verticalResistor5", "resistorVertical5.png", -5, 5, 0, 5);
 			p4.setPosition(new Point(185, 171));
 			p4.setStartingPosition(new Point(185, 171));
 			p4.setMovable(true);
@@ -519,7 +522,7 @@ public class FinalProject extends Game{
 			p5.setStartingPosition(new Point(331, 171));
 			p5.setMovable(true);
 			addPieceAtIndex(p5, 4);
-			p6 = new Piece("horizontalResistor10", "resistorHorizontal10.png", -1, 1, 0, 0);
+			p6 = new Piece("horizontalResistor10", "resistorHorizontal10.png", -1, 1, 0, 10);
 			p6.setPosition(new Point(477, 171));
 			p6.setStartingPosition(new Point(477, 171));
 			p6.setMovable(true);

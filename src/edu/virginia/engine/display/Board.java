@@ -164,7 +164,11 @@ public class Board extends DisplayObject {
         int netResistance = 0;
         int previousEnd = -5;
 
-        for(Piece p = start; p.getIndex() !=  bombIndex; p = getPieceAtIndex(p.getIndex() + p.getEnd())){
+        if(start == null){
+            return false;
+        }
+
+        for(Piece p = start; p.getIndex() !=  batteryIndex; p = getPieceAtIndex(p.getIndex() + p.getEnd())){
         	if(p.getStart() != (-1*previousEnd)){
         		int t = p.getEnd();
         		p.setEnd(p.getStart());
@@ -196,7 +200,11 @@ public class Board extends DisplayObject {
         int netResistance = 0;
         int previousEnd = -5;
 
-        for(Piece p = start; p.getIndex() !=  bombIndex; p = getPieceAtIndex(p.getIndex() + p.getEnd())){
+        if(start == null){
+            return false;
+        }
+
+        for(Piece p = start; p.getIndex() !=  batteryIndex; p = getPieceAtIndex(p.getIndex() + p.getEnd())){
         	if(p.getStart() != (-1*previousEnd)){
         		int t = p.getEnd();
         		p.setEnd(p.getStart());
@@ -212,7 +220,7 @@ public class Board extends DisplayObject {
         	}
         }
         
-        if(batteryVoltage / netResistance == getFinalCurrent()){
+        if((batteryVoltage / netResistance) == getFinalCurrent()){
             return true;
         }else{
             return false;
