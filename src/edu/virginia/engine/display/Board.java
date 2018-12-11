@@ -76,8 +76,9 @@ public class Board extends DisplayObject {
 
     public Piece getPiece(String id){
         for(int i=0; i<this.pieces.length; i++){
-            if (this.pieces[i].getId() == id)
-                return this.pieces[i];
+        	if (this.pieces[i] != null)
+	            if (this.pieces[i].getId() == id)
+	                return this.pieces[i];
         }
         return null;
     }

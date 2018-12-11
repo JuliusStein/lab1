@@ -25,6 +25,8 @@ public class FinalProject extends Game{
     static double offsetx = 0;
     static double offsety = 0;
     static int currentLevel = 0;
+    static boolean canHint = false;
+    static double sinceHint = 0;
 
     static SoundManager sound = new SoundManager();
     @SuppressWarnings("unused")
@@ -63,6 +65,11 @@ public class FinalProject extends Game{
     @Override
     public void update(ArrayList<Integer> pressedKeys, ArrayList<Integer> pressedMouse){
         super.update(pressedKeys, pressedMouse);
+        
+        if (sinceHint >= 120)
+        	canHint = true;
+        else
+        	sinceHint+=1;
 
         Point p = MouseInfo.getPointerInfo().getLocation();
         
@@ -133,12 +140,8 @@ public class FinalProject extends Game{
 
         	}
         	if (p.getX() >= 15 && p.getX() <= 165 && p.getY() >= 415 && p.getY() <= 465)
-        	{
-        		System.out.println("inside the yellow");
-        		// TODO: this
-        		
-        		// call the hint method? maybe if we decide to do it
-        	}
+        		hint(currentLevel);
+        	
         	if (p.getX() >= 15 && p.getX() <= 165 && p.getY() >= 490 && p.getY() <= 540)
         	{	
         		getMainFrame().setVisible(false);
@@ -169,7 +172,323 @@ public class FinalProject extends Game{
         }
     }
 
-    /**
+    private void hint(int currentLevel2) 
+    {
+    	if (!canHint)
+    		return;
+		if (currentLevel2 == 1)
+		{
+			if (board.getPieceAtIndex(5) != p6)
+			{
+				if (board.getPieceAtIndex(5) != null)
+				{
+					Piece piece = board.getPieceAtIndex(5);
+					board.removePieceAtIndex(5);
+					bank.add(piece);
+					piece.setPosition(piece.getStartingPosition());
+				}
+				
+				if (board.getPiece("bottomRight") != null)
+				{
+					// piece is in board
+					Piece piece = board.getPiece("bottomRight");
+					piece.setPosition(new Point(650, 166));
+					board.removePieceAtIndex(piece.getIndex());
+					board.addPieceAtIndex(piece, 5);
+					piece.setMovable(false);
+				}
+				else
+				{
+					// piece is in bank
+					Piece piece = null;
+					if (bank.contains(p6))
+						piece = bank.get(bank.indexOf(p6));
+					else
+						return;
+					piece.setPosition(new Point(650, 166));
+					removePieceAtIndex(bank.indexOf(p6));
+					board.addPieceAtIndex(piece, 5);
+					piece.setMovable(false);
+				}
+			}
+			else if (board.getPieceAtIndex(6) != p1)
+			{
+				if (board.getPieceAtIndex(6) != null)
+				{
+					Piece piece = board.getPieceAtIndex(6);
+					board.removePieceAtIndex(6);
+					bank.add(piece);
+					piece.setPosition(piece.getStartingPosition());
+				}
+				
+				if (board.getPiece("horizontalWire") != null)
+				{
+					// piece is in board
+					Piece piece = board.getPiece("horizontalWire");
+					piece.setPosition(new Point(791, 166));
+					board.removePieceAtIndex(piece.getIndex());
+					board.addPieceAtIndex(piece, 6);
+					piece.setMovable(false);
+				}
+				else
+				{
+					// piece is in bank
+					Piece piece = null;
+					if (bank.contains(p1))
+						piece = bank.get(bank.indexOf(p1));
+					else
+						return;
+					piece.setPosition(new Point(791, 166));
+					removePieceAtIndex(bank.indexOf(p1));
+					board.addPieceAtIndex(piece, 6);
+					piece.setMovable(false);
+				}
+			}
+			else if (board.getPieceAtIndex(7) != p4)
+			{
+				if (board.getPieceAtIndex(7) != null)
+				{
+					Piece piece = board.getPieceAtIndex(7);
+					board.removePieceAtIndex(7);
+					bank.add(piece);
+					piece.setPosition(piece.getStartingPosition());
+				}
+				
+				if (board.getPiece("bottomLeft") != null)
+				{
+					// piece is in board
+					Piece piece = board.getPiece("bottomLeft");
+					piece.setPosition(new Point(932, 166));
+					board.removePieceAtIndex(piece.getIndex());
+					board.addPieceAtIndex(piece, 7);
+					piece.setMovable(false);
+				}
+				else
+				{
+					// piece is in bank
+					Piece piece = null;
+					if (bank.contains(p4))
+						piece = bank.get(bank.indexOf(p4));
+					else
+						return;
+					piece.setPosition(new Point(932, 166));
+					removePieceAtIndex(bank.indexOf(p4));
+					board.addPieceAtIndex(piece, 7);
+					piece.setMovable(false);
+				}
+			}
+		}
+		else if (currentLevel2 == 2)
+		{
+			if (board.getPieceAtIndex(5) != p2)
+			{
+				if (board.getPieceAtIndex(5) != null)
+				{
+					Piece piece = board.getPieceAtIndex(5);
+					board.removePieceAtIndex(5);
+					bank.add(piece);
+					piece.setPosition(piece.getStartingPosition());
+				}
+				
+				if (board.getPiece("bottomRight") != null)
+				{
+					// piece is in board
+					Piece piece = board.getPiece("bottomRight");
+					piece.setPosition(new Point(650, 166));
+					board.removePieceAtIndex(piece.getIndex());
+					board.addPieceAtIndex(piece, 5);
+					piece.setMovable(false);
+				}
+				else
+				{
+					// piece is in bank
+					Piece piece = null;
+					if (bank.contains(p2))
+						piece = bank.get(bank.indexOf(p2));
+					else
+						return;
+					piece.setPosition(new Point(650, 166));
+					removePieceAtIndex(bank.indexOf(p2));
+					board.addPieceAtIndex(piece, 5);
+					piece.setMovable(false);
+				}
+			}
+			else if (board.getPieceAtIndex(6) != p1)
+			{
+				if (board.getPieceAtIndex(6) != null)
+				{
+					Piece piece = board.getPieceAtIndex(6);
+					board.removePieceAtIndex(6);
+					bank.add(piece);
+					piece.setPosition(piece.getStartingPosition());
+				}
+				
+				if (board.getPiece("horizontalWire") != null)
+				{
+					// piece is in board
+					Piece piece = board.getPiece("horizontalWire");
+					piece.setPosition(new Point(791, 166));
+					board.removePieceAtIndex(piece.getIndex());
+					board.addPieceAtIndex(piece, 6);
+					piece.setMovable(false);
+				}
+				else
+				{
+					// piece is in bank
+					Piece piece = null;
+					if (bank.contains(p1))
+						piece = bank.get(bank.indexOf(p1));
+					else
+						return;
+					piece.setPosition(new Point(791, 166));
+					removePieceAtIndex(bank.indexOf(p1));
+					board.addPieceAtIndex(piece, 6);
+					piece.setMovable(false);
+				}
+			}
+			else if (board.getPieceAtIndex(7) != p7)
+			{
+				if (board.getPieceAtIndex(7) != null)
+				{
+					Piece piece = board.getPieceAtIndex(7);
+					board.removePieceAtIndex(7);
+					bank.add(piece);
+					piece.setPosition(piece.getStartingPosition());
+				}
+				
+				if (board.getPiece("horizontalResistor10") != null)
+				{
+					// piece is in board
+					Piece piece = board.getPiece("resistorHorizontal10");
+					piece.setPosition(new Point(932, 166));
+					board.removePieceAtIndex(piece.getIndex());
+					board.addPieceAtIndex(piece, 7);
+					piece.setMovable(false);
+				}
+				else
+				{
+					// piece is in bank
+					Piece piece = null;
+					if (bank.contains(p7))
+						piece = bank.get(bank.indexOf(p7));
+					else
+						return;
+					piece.setPosition(new Point(932, 166));
+					removePieceAtIndex(bank.indexOf(p7));
+					board.addPieceAtIndex(piece, 7);
+					piece.setMovable(false);
+				}
+			}
+		}
+		else
+		{
+			if (board.getPieceAtIndex(1) != p1)
+			{
+				if (board.getPieceAtIndex(1) != null)
+				{
+					Piece piece = board.getPieceAtIndex(1);
+					board.removePieceAtIndex(1);
+					bank.add(piece);
+					piece.setPosition(piece.getStartingPosition());
+				}
+				
+				if (board.getPiece("horizontalWire") != null)
+				{
+					// piece is in board
+					Piece piece = board.getPiece("horizontalWire");
+					piece.setPosition(new Point(791, 25));
+					board.removePieceAtIndex(piece.getIndex());
+					board.addPieceAtIndex(piece, 1);
+					piece.setMovable(false);
+				}
+				else
+				{
+					// piece is in bank
+					Piece piece = null;
+					if (bank.contains(p1))
+						piece = bank.get(bank.indexOf(p1));
+					else
+						return;
+					piece.setPosition(new Point(791, 25));
+					removePieceAtIndex(bank.indexOf(p1));
+					board.addPieceAtIndex(piece, 1);
+					piece.setMovable(false);
+				}
+			}
+			else if (board.getPieceAtIndex(3) != p2)
+			{
+				if (board.getPieceAtIndex(3) != null)
+				{
+					Piece piece = board.getPieceAtIndex(3);
+					board.removePieceAtIndex(3);
+					bank.add(piece);
+					piece.setPosition(piece.getStartingPosition());
+				}
+				
+				if (board.getPiece("horizontalResistor5") != null)
+				{
+					// piece is in board
+					Piece piece = board.getPiece("horizontalResistor5");
+					piece.setPosition(new Point(1073, 25));
+					board.removePieceAtIndex(piece.getIndex());
+					board.addPieceAtIndex(piece, 3);
+					piece.setMovable(false);
+				}
+				else
+				{
+					System.out.println("hello");
+					// piece is in bank
+					Piece piece = null;
+					if (bank.contains(p2))
+						piece = bank.get(bank.indexOf(p2));
+					else
+						return;
+					piece.setPosition(new Point(1073, 25));
+					removePieceAtIndex(bank.indexOf(p2));
+					board.addPieceAtIndex(piece, 3);
+					piece.setMovable(false);
+				}
+			}
+			else if (board.getPieceAtIndex(4) != p3)
+			{
+				if (board.getPieceAtIndex(4) != null)
+				{
+					Piece piece = board.getPieceAtIndex(4);
+					board.removePieceAtIndex(4);
+					bank.add(piece);
+					piece.setPosition(piece.getStartingPosition());
+				}
+				
+				if (board.getPiece("botLeft") != null)
+				{
+					// piece is in board
+					Piece piece = board.getPiece("botLeft");
+					piece.setPosition(new Point(1214, 25));
+					board.removePieceAtIndex(piece.getIndex());
+					board.addPieceAtIndex(piece, 4);
+					piece.setMovable(false);
+				}
+				else
+				{
+					// piece is in bank
+					Piece piece = null;
+					if (bank.contains(p3))
+						piece = bank.get(bank.indexOf(p3));
+					else
+						return;
+					piece.setPosition(new Point(1214, 25));
+					removePieceAtIndex(bank.indexOf(p3));
+					board.addPieceAtIndex(piece, 4);
+					piece.setMovable(false);
+				}
+			}
+		}
+		
+		canHint = false;
+		sinceHint = 0;
+	}
+
+	/**
      * Engine automatically invokes draw() every frame as well. If we want to make sure mario gets drawn to
      * the screen, we need to make sure to override this method and call mario's draw method.
      * */
