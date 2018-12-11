@@ -19,6 +19,7 @@ public class FinalProject extends Game{
 	static DisplayObject background = new DisplayObject("background", "background.png");
     static DisplayObject partBank = new DisplayObject("partBank", "partBank.png");
     static DisplayObject congratulations = new DisplayObject("congratulations", "congratulations.png");
+    static DisplayObject losePic = new DisplayObject("losePic", "lose.png");
     static Piece p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, bomb, battery;
     static ArrayList<Piece> bank = new ArrayList<Piece>();
     static Piece inHand = null;
@@ -27,12 +28,14 @@ public class FinalProject extends Game{
     static int currentLevel = 0;
     static boolean canHint = false;
     static double sinceHint = 0;
+    static double time = 300;
 
     static SoundManager sound = new SoundManager();
     @SuppressWarnings("unused")
     private boolean hitBox = false;
     private boolean pickedUp = false;
     private boolean finished = false;
+    private boolean lose = false;
 
     /**
      * Constructor. See constructor in Game.java for details on the parameters given
@@ -70,6 +73,14 @@ public class FinalProject extends Game{
         	canHint = true;
         else
         	sinceHint+=1;
+        
+        time -= (1.0/60);
+        if (time < 1)
+        {
+        	if (lose == false)
+        		sound.playSoundEffect("boom");
+        	lose = true;
+        }
 
         Point p = MouseInfo.getPointerInfo().getLocation();
         
@@ -127,7 +138,6 @@ public class FinalProject extends Game{
         	
         	if (p.getX() >= 15 && p.getX() <= 165 && p.getY() >= 340 && p.getY() <= 390)
         	{
-        		// TODO: this
                 if (board.hasCorrectResistance())
                 {
                     sound.playSoundEffect("right");
@@ -436,7 +446,6 @@ public class FinalProject extends Game{
 				}
 				else
 				{
-					System.out.println("hello");
 					// piece is in bank
 					Piece piece = null;
 					if (bank.contains(p2))
@@ -533,6 +542,23 @@ public class FinalProject extends Game{
             }
         }
         
+        int hour = (int) (time/60);
+        int minutes = (int) (time % 60);
+        String clock = "";
+        if (minutes < 10)
+        	clock = Integer.toString(hour) + ":0" + Integer.toString(minutes);
+        else 
+        	clock = Integer.toString(hour) + ":" + Integer.toString(minutes);
+        
+        if (lose == false)
+        {
+	        g.setColor(Color.WHITE);
+	        g.setFont(new Font("Courier", Font.PLAIN, 65));
+	        g.drawString(clock, 15, 200);
+        }
+        else
+        	if (losePic != null) losePic.draw(g);
+        
         if (finished)
         	if (congratulations != null) congratulations.draw(g);
     }
@@ -547,6 +573,7 @@ public class FinalProject extends Game{
 
 		sound.loadSoundEffect("wrong", "resources/wrong.wav");
 		sound.loadSoundEffect("right", "resources/right.wav");
+		sound.loadSoundEffect("boom", "resources/boom.wav");
 
         //sound.playMusic("theme");
 
@@ -554,6 +581,7 @@ public class FinalProject extends Game{
         partBank.setPosition(new Point(185,25));
         board.setPosition(new Point(650,25));
         congratulations.setPosition(new Point(343, 264));
+        losePic.setPosition(new Point(442, 211));
                 
         final JFrame parent = new JFrame();
         
