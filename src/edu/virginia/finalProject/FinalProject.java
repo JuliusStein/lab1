@@ -554,7 +554,7 @@ public class FinalProject extends Game{
         {
 	        g.setColor(Color.WHITE);
 	        g.setFont(new Font("Courier", Font.PLAIN, 65));
-	        g.drawString(clock, 15, 200);
+	        g.drawString(clock, 10, 200);
         }
         else
         	if (losePic != null) losePic.draw(g);
